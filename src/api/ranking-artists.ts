@@ -1,9 +1,6 @@
-import axios from "axios";
 import { ArtistListResponse } from "../types";
+import { apiClient } from "./client";
 
 export const rankingArtists = async (): Promise<ArtistListResponse> => {
-    const response = await axios.get<ArtistListResponse>(
-        `${import.meta.env.VITE_API_BASE_URL}/api/ranking/artists/`
-    );
-    return response.data;
+    return await apiClient.get<ArtistListResponse>(`/api/ranking/artists/`);
 };
