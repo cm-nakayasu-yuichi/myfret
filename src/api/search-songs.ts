@@ -3,11 +3,13 @@ import { SongListResponse } from "../types";
 import { encodeURIWithPlus } from "../utils/encodeURIWithPlus";
 
 export const searchSongs = async (
-    keyword: string,
+    keyword: string
 ): Promise<SongListResponse> => {
     const encodedKeyword = encodeURIWithPlus(keyword);
     const response = await axios.get<SongListResponse>(
-        `http://localhost:3001/api/search/songs/${encodedKeyword}`,
+        `${
+            import.meta.env.VITE_API_BASE_URL
+        }/api/search/songs/${encodedKeyword}`
     );
     return response.data;
 };

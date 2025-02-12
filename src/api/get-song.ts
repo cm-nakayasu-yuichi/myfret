@@ -3,7 +3,7 @@ import { SongResponse } from "../types";
 
 export const getSong = async (id: string): Promise<SongResponse> => {
     const response = await axios.get<SongResponse>(
-        `http://localhost:3001/api/song/${id}`,
+        `${import.meta.env.VITE_API_BASE_URL}/api/song/${id}`
     );
     return response.data;
 };

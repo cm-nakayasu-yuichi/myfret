@@ -5,7 +5,7 @@ import { encodeURIWithPlus } from "../utils/encodeURIWithPlus";
 export const getArtist = async (keyword: string): Promise<SongListResponse> => {
     const encodedKeyword = encodeURIWithPlus(keyword);
     const response = await axios.get<SongListResponse>(
-        `http://localhost:3001/api/artist/${encodedKeyword}`,
+        `${import.meta.env.VITE_API_BASE_URL}/api/artist/${encodedKeyword}`
     );
     return response.data;
 };
