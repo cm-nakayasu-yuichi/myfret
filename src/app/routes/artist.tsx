@@ -4,8 +4,8 @@ import {
 } from "@mui/material";
 import {
     ListContainer,
-    ListText,
 } from "../../components/common";
+import { ListText } from "../../components/common/list-text";
 import { NormalListItem } from "../../components/common/list-item";
 import { PaginatedList } from "../../components/common/paginated-list";
 import { SectionTitle } from "../../components/common/section-title";

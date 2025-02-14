@@ -5,8 +5,9 @@ import {
 import { usePagination } from "../../hooks/usePagination";
 import { useRankingArtists } from "../../hooks/useRankingArtists";
 import { RankingNumber } from "../../components/common/ranking-number";
-import { ArtistListText, ListContainer } from "../../components/common";
+import { ListContainer } from "../../components/common";
 import { NormalListItem } from "../../components/common/list-item";
+import { ArtistListText } from "../../components/common/list-text";
 import { PaginatedList } from "../../components/common/paginated-list";
 import { SectionTitle } from "../../components/common/section-title";
 

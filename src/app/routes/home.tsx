@@ -6,10 +6,9 @@ import {
 } from "@mui/material";
 import {
     ListContainer,
-    ArtistListText,
-    SongListText,
 } from "../../components/common";
 import { NormalListItem, MoreListItem } from "../../components/common/list-item";
+import { ArtistListText, SongListText } from "../../components/common/list-text";
 import { RankingNumber } from "../../components/common/ranking-number";
 import { SectionTitle } from "../../components/common/section-title";
 
