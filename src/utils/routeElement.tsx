@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { Header } from "../components/layout/header";
+import { Header } from "../components/layouts/header";
 
 // ヘッダー付きレイアウト
 interface LayoutWithHeaderProps {

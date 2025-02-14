@@ -1,24 +1,20 @@
 import { useGetHomeInfo } from "../../hooks/useGetHomeInfo";
 import {
-    Container,
-    List,
     Grid,
 } from "@mui/material";
-import {
-    RankingNumber,
-    SectionTitle,
-    MoreListItem,
-    ListContainer,
-    NormalListItem,
-    ArtistListText,
-    SongListText,
-} from "../../components/common";
+import { PageContainer } from "../../components/layouts/page-container";
+import { ListContainer } from "../../components/layouts/list-container";
+import { NormalListItem, MoreListItem } from "../../components/common/list-item";
+import { ArtistListText, SongListText } from "../../components/common/list-text";
+import { RankingNumber } from "../../components/common/ranking-number";
+import { SectionTitle } from "../../components/common/section-title";
+import { NormalList } from "../../components/common/list";
 
 export const HomeRoute = () => {
     const { loading, error, result } = useGetHomeInfo();
 
     return (
-        <Container sx={{ my: 4 }}>
+        <PageContainer>
             <Grid container spacing={4}>
                 {/* 曲ランキング */}
                 <Grid item xs={12} md={6}>
@@ -28,7 +24,7 @@ export const HomeRoute = () => {
                         empty={(result?.song_ranking.length ?? 0) <= 0}
                         error={error}
                     >
-                        <List sx={{ p: 0 }}>
+                        <NormalList>
                             {result?.song_ranking.map((song, index) => (
                                 <NormalListItem
                                     index={index}
@@ -40,7 +36,7 @@ export const HomeRoute = () => {
                                 </NormalListItem>
                             ))}
                             <MoreListItem to="/ranking/songs" />
-                        </List>
+                        </NormalList>
                     </ListContainer>
                 </Grid>
 
@@ -52,7 +48,7 @@ export const HomeRoute = () => {
                         empty={(result?.artist_ranking.length ?? 0) <= 0}
                         error={error}
                     >
-                        <List sx={{ p: 0 }}>
+                        <NormalList>
                             {result?.artist_ranking.map((artist, index) => (
                                 <NormalListItem
                                     index={index}
@@ -64,10 +60,10 @@ export const HomeRoute = () => {
                                 </NormalListItem>
                             ))}
                             <MoreListItem to="/ranking/artists" />
-                        </List>
+                        </NormalList>
                     </ListContainer>
                 </Grid>
             </Grid>
-        </Container>
+        </PageContainer>
     );
 };

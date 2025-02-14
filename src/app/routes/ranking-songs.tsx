@@ -1,17 +1,13 @@
 import { useParams } from "react-router-dom";
-import {
-    Container,
-} from "@mui/material";
-import { 
-    ListContainer, 
-    SectionTitle,
-    RankingNumber,
-    NormalListItem,
-    SongListText,
-    PaginatedList,
-} from "../../components/common";
+import { ListContainer } from "../../components/layouts/list-container";
+import { NormalListItem } from "../../components/common/list-item";
+import { SongListText } from "../../components/common/list-text";
+import { RankingNumber } from "../../components/common/ranking-number";
+import { PaginatedList } from "../../components/common/list";
+import { SectionTitle } from "../../components/common/section-title";
 import { usePagination } from "../../hooks/usePagination";
 import { useRankingSongs } from "../../hooks/useRankingSongs";
+import { PageContainer } from "../../components/layouts/page-container";
 
 export const RankingSongsRoute = () => {
     const { page } = useParams<{ page?: string }>();
@@ -28,7 +24,7 @@ export const RankingSongsRoute = () => {
     });
 
     return (
-        <Container sx={{ my: 4 }}>
+        <PageContainer>
             <SectionTitle>楽曲ランキング</SectionTitle>
             <ListContainer
                 empty={(result?.songs.length ?? 0) <= 0}
@@ -53,6 +49,6 @@ export const RankingSongsRoute = () => {
                     )}
                 />
             </ListContainer>
-        </Container>
+        </PageContainer>
     );
 };

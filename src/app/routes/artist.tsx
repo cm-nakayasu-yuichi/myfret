@@ -1,16 +1,12 @@
 import { useParams } from "react-router-dom";
-import {
-    Container,
-} from "@mui/material";
-import { 
-    ListContainer, 
-    NormalListItem, 
-    SectionTitle,
-    ListText,
-    PaginatedList,
-} from "../../components/common";
+import { ListContainer } from "../../components/layouts/list-container";
+import { ListText } from "../../components/common/list-text";
+import { NormalListItem } from "../../components/common/list-item";
+import { PaginatedList } from "../../components/common/list";
+import { SectionTitle } from "../../components/common/section-title";
 import { usePagination } from "../../hooks/usePagination";
 import { useGetSongsOfArtsist } from "../../hooks/useGetSongsOfArtsist";
+import { PageContainer } from "../../components/layouts/page-container";
 
 export const ArtistRoute = () => {
     const { name = "", page } = useParams<{ name: string; page?: string }>();
@@ -28,7 +24,7 @@ export const ArtistRoute = () => {
     });
 
     return (
-        <Container sx={{ my: 4 }}>
+        <PageContainer>
             <SectionTitle total={result?.count}>{name}</SectionTitle>
             <ListContainer
                 error={error}
@@ -53,6 +49,6 @@ export const ArtistRoute = () => {
                     )}
                 />
             </ListContainer>
-        </Container>
+        </PageContainer>
     );
 };
