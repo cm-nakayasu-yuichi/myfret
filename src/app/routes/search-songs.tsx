@@ -5,7 +5,7 @@ import {
     List,
 } from "@mui/material";
 import { useSearchSongs } from "../../hooks/useSearchSongs";
-import { ListContainer } from "../../components/common";
+import { ListContainer } from "../../components/layouts/list-container";
 import { NormalListItem } from "../../components/common/list-item";
 import { SongListText } from "../../components/common/list-text";
 import { SectionTitle } from "../../components/common/section-title";

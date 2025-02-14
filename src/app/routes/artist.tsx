@@ -2,9 +2,7 @@ import { useParams } from "react-router-dom";
 import {
     Container,
 } from "@mui/material";
-import {
-    ListContainer,
-} from "../../components/common";
+import { ListContainer } from "../../components/layouts/list-container";
 import { ListText } from "../../components/common/list-text";
 import { NormalListItem } from "../../components/common/list-item";
 import { PaginatedList } from "../../components/common/paginated-list";

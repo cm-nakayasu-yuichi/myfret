@@ -2,9 +2,7 @@ import { useParams } from "react-router-dom";
 import {
     Container,
 } from "@mui/material";
-import {
-    ListContainer,
-} from "../../components/common";
+import { ListContainer } from "../../components/layouts/list-container";
 import { NormalListItem } from "../../components/common/list-item";
 import { SongListText } from "../../components/common/list-text";
 import { RankingNumber } from "../../components/common/ranking-number";

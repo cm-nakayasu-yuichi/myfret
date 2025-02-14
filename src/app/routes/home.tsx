@@ -4,9 +4,7 @@ import {
     List,
     Grid,
 } from "@mui/material";
-import {
-    ListContainer,
-} from "../../components/common";
+import { ListContainer } from "../../components/layouts/list-container";
 import { NormalListItem, MoreListItem } from "../../components/common/list-item";
 import { ArtistListText, SongListText } from "../../components/common/list-text";
 import { RankingNumber } from "../../components/common/ranking-number";
