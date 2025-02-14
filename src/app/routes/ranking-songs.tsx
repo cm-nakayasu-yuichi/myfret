@@ -4,10 +4,10 @@ import {
 } from "@mui/material";
 import {
     ListContainer,
-    RankingNumber,
     NormalListItem,
     SongListText,
 } from "../../components/common";
+import { RankingNumber } from "../../components/common/ranking-number";
 import { PaginatedList } from "../../components/common/paginated-list";
 import { SectionTitle } from "../../components/common/section-title";
 import { usePagination } from "../../hooks/usePagination";

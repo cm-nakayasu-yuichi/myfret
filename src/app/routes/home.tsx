@@ -5,13 +5,13 @@ import {
     Grid,
 } from "@mui/material";
 import {
-    RankingNumber,
     MoreListItem,
     ListContainer,
     NormalListItem,
     ArtistListText,
     SongListText,
 } from "../../components/common";
+import { RankingNumber } from "../../components/common/ranking-number";
 import { SectionTitle } from "../../components/common/section-title";
 
 export const HomeRoute = () => {

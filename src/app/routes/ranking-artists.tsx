@@ -4,7 +4,7 @@ import {
 } from "@mui/material";
 import { usePagination } from "../../hooks/usePagination";
 import { useRankingArtists } from "../../hooks/useRankingArtists";
-import { RankingNumber } from "../../components/common/display/RankingNumber";
+import { RankingNumber } from "../../components/common/ranking-number";
 import { ArtistListText, ListContainer, NormalListItem } from "../../components/common";
 import { PaginatedList } from "../../components/common/paginated-list";
 import { SectionTitle } from "../../components/common/section-title";
