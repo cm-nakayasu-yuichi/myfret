@@ -1,7 +1,4 @@
 import { useParams } from "react-router-dom";
-import {
-    Container,
-} from "@mui/material";
 import { ListContainer } from "../../components/layouts/list-container";
 import { NormalListItem } from "../../components/common/list-item";
 import { ArtistListText } from "../../components/common/list-text";
@@ -9,6 +6,7 @@ import { PaginatedList } from "../../components/common/paginated-list";
 import { SectionTitle } from "../../components/common/section-title";
 import { useSearchArtists } from "../../hooks/useSearchArtists";
 import { usePagination } from "../../hooks/usePagination";
+import { PageContainer } from "../../components/layouts/page-container";
 
 export const SearchArtistsRoute = () => {
     const { keyword = "", page } = useParams<{
@@ -29,7 +27,7 @@ export const SearchArtistsRoute = () => {
     });
 
     return (
-        <Container sx={{ my: 4 }}>
+        <PageContainer>
             <SectionTitle total={result?.artists.length}>アーティスト名 "{keyword}" の検索結果</SectionTitle>
             <ListContainer
                 empty={(result?.artists.length ?? 0) <= 0}
@@ -54,6 +52,6 @@ export const SearchArtistsRoute = () => {
                     )}
                 />
             </ListContainer>
-        </Container>
+        </PageContainer>
     );
 };

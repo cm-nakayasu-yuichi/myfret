@@ -1,7 +1,4 @@
 import { useParams } from "react-router-dom";
-import {
-    Container,
-} from "@mui/material";
 import { usePagination } from "../../hooks/usePagination";
 import { useRankingArtists } from "../../hooks/useRankingArtists";
 import { RankingNumber } from "../../components/common/ranking-number";
@@ -10,6 +7,7 @@ import { NormalListItem } from "../../components/common/list-item";
 import { ArtistListText } from "../../components/common/list-text";
 import { PaginatedList } from "../../components/common/paginated-list";
 import { SectionTitle } from "../../components/common/section-title";
+import { PageContainer } from "../../components/layouts/page-container";
 
 export const RankingArtistsRoute = () => {
     const { page } = useParams<{ page?: string }>();
@@ -26,7 +24,7 @@ export const RankingArtistsRoute = () => {
     });
 
     return (
-        <Container sx={{ my: 4 }}>
+        <PageContainer>
             <SectionTitle total={result?.count}>アーティストランキング</SectionTitle>
             <ListContainer
                 empty={(result?.artists.length ?? 0) <= 0}
@@ -51,6 +49,6 @@ export const RankingArtistsRoute = () => {
                     )}
                 />
             </ListContainer>
-        </Container>
+        </PageContainer>
     );
 };

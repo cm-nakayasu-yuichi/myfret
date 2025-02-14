@@ -1,9 +1,9 @@
 import { useGetHomeInfo } from "../../hooks/useGetHomeInfo";
 import {
-    Container,
     List,
     Grid,
 } from "@mui/material";
+import { PageContainer } from "../../components/layouts/page-container";
 import { ListContainer } from "../../components/layouts/list-container";
 import { NormalListItem, MoreListItem } from "../../components/common/list-item";
 import { ArtistListText, SongListText } from "../../components/common/list-text";
@@ -14,7 +14,7 @@ export const HomeRoute = () => {
     const { loading, error, result } = useGetHomeInfo();
 
     return (
-        <Container sx={{ my: 4 }}>
+        <PageContainer>
             <Grid container spacing={4}>
                 {/* 曲ランキング */}
                 <Grid item xs={12} md={6}>
@@ -64,6 +64,6 @@ export const HomeRoute = () => {
                     </ListContainer>
                 </Grid>
             </Grid>
-        </Container>
+        </PageContainer>
     );
 };
