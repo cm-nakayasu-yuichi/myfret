@@ -1,4 +1,4 @@
-import { HomeInfoResponse } from "../../../types";
+import { APIState, HomeInfoResponse } from "../../../types";
 import { SectionTitle } from "../../common/section-title";
 import { ListContainer } from "../../layouts/list-container";
 import { NormalList } from "../../common/list";
@@ -7,22 +7,20 @@ import { RankingNumber } from "../../common/ranking-number";
 import { ArtistListText } from "../../common/list-text";
 
 interface HomeArtistRankingSectionProps {
-    loading: boolean
-    error: string | null;
-    result: HomeInfoResponse | null;
+    state: APIState<HomeInfoResponse>;
 }
 
-export const HomeArtistRankingSection = ({ loading, error, result }: HomeArtistRankingSectionProps) => {
+export const HomeArtistRankingSection = ({ state }: HomeArtistRankingSectionProps) => {
     return (
         <>
             <SectionTitle>アーティストランキング</SectionTitle>
             <ListContainer
-                loading={loading}
-                empty={(result?.artist_ranking.length ?? 0) <= 0}
-                error={error}
+                loading={state.loading}
+                empty={(state.result?.artist_ranking.length ?? 0) <= 0}
+                error={state.error}
             >
                 <NormalList>
-                    {result?.artist_ranking.map((artist, index) => (
+                    {state.result?.artist_ranking.map((artist, index) => (
                         <NormalListItem
                             index={index}
                             key={artist.id}

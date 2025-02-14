@@ -8,16 +8,8 @@ export const HomePage = () => {
     return (
         <PageContainer>
             <HomeContainer
-                song={<HomeSongRankingSection
-                    loading={loading}
-                    error={error}
-                    result={result}
-                />}
-                artist={<HomeArtistRankingSection
-                    loading={loading}
-                    error={error}
-                    result={result}
-                />}
+                song={<HomeSongRankingSection state={{ loading, error, result }} />}
+                artist={<HomeArtistRankingSection state={{ loading, error, result }} />}
             />
         </PageContainer >
     );
