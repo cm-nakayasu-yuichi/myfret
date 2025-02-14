@@ -4,9 +4,9 @@ import {
 } from "@mui/material";
 import {
     ListContainer,
-    NormalListItem,
     SongListText,
 } from "../../components/common";
+import { NormalListItem } from "../../components/common/list-item";
 import { RankingNumber } from "../../components/common/ranking-number";
 import { PaginatedList } from "../../components/common/paginated-list";
 import { SectionTitle } from "../../components/common/section-title";

@@ -2,7 +2,8 @@ import { useParams } from "react-router-dom";
 import {
     Container,
 } from "@mui/material";
-import { ArtistListText, ListContainer, NormalListItem } from "../../components/common";
+import { ArtistListText, ListContainer } from "../../components/common";
+import { NormalListItem } from "../../components/common/list-item";
 import { PaginatedList } from "../../components/common/paginated-list";
 import { SectionTitle } from "../../components/common/section-title";
 import { useSearchArtists } from "../../hooks/useSearchArtists";

@@ -4,9 +4,9 @@ import {
 } from "@mui/material";
 import {
     ListContainer,
-    NormalListItem,
     ListText,
 } from "../../components/common";
+import { NormalListItem } from "../../components/common/list-item";
 import { PaginatedList } from "../../components/common/paginated-list";
 import { SectionTitle } from "../../components/common/section-title";
 import { usePagination } from "../../hooks/usePagination";

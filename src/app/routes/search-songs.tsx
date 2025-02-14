@@ -5,7 +5,8 @@ import {
     List,
 } from "@mui/material";
 import { useSearchSongs } from "../../hooks/useSearchSongs";
-import { ListContainer, NormalListItem, SongListText } from "../../components/common";
+import { ListContainer, SongListText } from "../../components/common";
+import { NormalListItem } from "../../components/common/list-item";
 import { SectionTitle } from "../../components/common/section-title";
 
 export const SearchSongsRoute = () => {
