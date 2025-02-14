@@ -3,10 +3,10 @@ import {
     Container,
 } from "@mui/material";
 import { usePagination } from "../../hooks/usePagination";
-import { PaginatedList } from "../../components/common/PaginatedList";
 import { useRankingArtists } from "../../hooks/useRankingArtists";
 import { RankingNumber } from "../../components/common/display/RankingNumber";
 import { ArtistListText, ListContainer, NormalListItem } from "../../components/common";
+import { PaginatedList } from "../../components/common/paginated-list";
 import { SectionTitle } from "../../components/common/section-title";
 
 export const RankingArtistsRoute = () => {

@@ -7,8 +7,8 @@ import {
     RankingNumber,
     NormalListItem,
     SongListText,
-    PaginatedList,
 } from "../../components/common";
+import { PaginatedList } from "../../components/common/paginated-list";
 import { SectionTitle } from "../../components/common/section-title";
 import { usePagination } from "../../hooks/usePagination";
 import { useRankingSongs } from "../../hooks/useRankingSongs";

@@ -6,8 +6,8 @@ import {
     ListContainer,
     NormalListItem,
     ListText,
-    PaginatedList,
 } from "../../components/common";
+import { PaginatedList } from "../../components/common/paginated-list";
 import { SectionTitle } from "../../components/common/section-title";
 import { usePagination } from "../../hooks/usePagination";
 import { useGetSongsOfArtsist } from "../../hooks/useGetSongsOfArtsist";
