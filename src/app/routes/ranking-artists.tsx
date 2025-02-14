@@ -6,7 +6,8 @@ import { usePagination } from "../../hooks/usePagination";
 import { PaginatedList } from "../../components/common/PaginatedList";
 import { useRankingArtists } from "../../hooks/useRankingArtists";
 import { RankingNumber } from "../../components/common/display/RankingNumber";
-import { ArtistListText, ListContainer, NormalListItem, SectionTitle } from "../../components/common";
+import { ArtistListText, ListContainer, NormalListItem } from "../../components/common";
+import { SectionTitle } from "../../components/common/section-title";
 
 export const RankingArtistsRoute = () => {
     const { page } = useParams<{ page?: string }>();

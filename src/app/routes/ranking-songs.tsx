@@ -2,14 +2,14 @@ import { useParams } from "react-router-dom";
 import {
     Container,
 } from "@mui/material";
-import { 
-    ListContainer, 
-    SectionTitle,
+import {
+    ListContainer,
     RankingNumber,
     NormalListItem,
     SongListText,
     PaginatedList,
 } from "../../components/common";
+import { SectionTitle } from "../../components/common/section-title";
 import { usePagination } from "../../hooks/usePagination";
 import { useRankingSongs } from "../../hooks/useRankingSongs";
 

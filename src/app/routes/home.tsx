@@ -6,13 +6,13 @@ import {
 } from "@mui/material";
 import {
     RankingNumber,
-    SectionTitle,
     MoreListItem,
     ListContainer,
     NormalListItem,
     ArtistListText,
     SongListText,
 } from "../../components/common";
+import { SectionTitle } from "../../components/common/section-title";
 
 export const HomeRoute = () => {
     const { loading, error, result } = useGetHomeInfo();
