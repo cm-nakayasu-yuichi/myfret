@@ -1,8 +1,5 @@
-import { Paper } from "@mui/material";
+import { Box, CircularProgress, List, ListItem, Paper } from "@mui/material";
 import { ReactNode } from "react";
-import { LoadingContent } from "./LoadingContent";
-import { ErrorContent } from "./ErrorContent";
-import { EmptyContent } from "./EmptyContent";
 
 interface ListContainerProps {
     children: ReactNode;
@@ -13,21 +10,43 @@ interface ListContainerProps {
 
 export const ListContainer = ({ children, empty, loading, error }: ListContainerProps) => {
     if (loading) {
-        return(
-            <LoadingContent/>
+        return (
+            <Box sx={{ display: "flex", justifyContent: "center", p: 3 }}>
+                <CircularProgress />
+            </Box>
         );
     }
     if (empty) {
-        return(
-            <EmptyContent/>
+        return (
+            <List sx={{ p: 0 }}>
+                <ListItem
+                    sx={{
+                        bgcolor: "inherit",
+                        textDecoration: "none",
+                        color: "inherit",
+                    }}
+                >
+                    取得に失敗しました
+                </ListItem>
+            </List>
         );
     }
     if (error) {
-        return(
-            <ErrorContent/>
+        return (
+            <List sx={{ p: 0 }}>
+                <ListItem
+                    sx={{
+                        bgcolor: "inherit",
+                        textDecoration: "none",
+                        color: "inherit",
+                    }}
+                >
+                    取得に失敗しました
+                </ListItem>
+            </List>
         );
     }
-    return(
+    return (
         <Paper sx={{ mb: 2 }}>
             {children}
         </Paper>
