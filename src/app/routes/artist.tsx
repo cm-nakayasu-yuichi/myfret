@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { ListContainer } from "../../components/layouts/list-container";
 import { ListText } from "../../components/common/list-text";
 import { NormalListItem } from "../../components/common/list-item";
-import { PaginatedList } from "../../components/common/paginated-list";
+import { PaginatedList } from "../../components/common/list";
 import { SectionTitle } from "../../components/common/section-title";
 import { usePagination } from "../../hooks/usePagination";
 import { useGetSongsOfArtsist } from "../../hooks/useGetSongsOfArtsist";

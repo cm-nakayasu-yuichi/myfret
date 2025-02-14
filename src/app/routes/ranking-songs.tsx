@@ -3,7 +3,7 @@ import { ListContainer } from "../../components/layouts/list-container";
 import { NormalListItem } from "../../components/common/list-item";
 import { SongListText } from "../../components/common/list-text";
 import { RankingNumber } from "../../components/common/ranking-number";
-import { PaginatedList } from "../../components/common/paginated-list";
+import { PaginatedList } from "../../components/common/list";
 import { SectionTitle } from "../../components/common/section-title";
 import { usePagination } from "../../hooks/usePagination";
 import { useRankingSongs } from "../../hooks/useRankingSongs";
