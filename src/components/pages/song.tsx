@@ -20,7 +20,7 @@ import { useParams } from "react-router-dom";
 import { useGetSong } from "../../hooks/useGetSong";
 import { buildSongDetailHtml } from "../../utils/buildSongDetailHtml";
 import { ChordSheetBox } from "../../styles/ChordSheetBox";
-import { Pulldown } from "../common/pulldown";
+import { Pulldown, PulldownContainer } from "../common/pulldown";
 
 interface ScrollContainerRef {
     scrollHeight: number;
@@ -254,16 +254,13 @@ export const SongPage = () => {
                     flexDirection: "column",
                 }}
             >
-                <FormControl fullWidth sx={{ mb: 3 }}>
-                    <InputLabel>カポ</InputLabel>
-                    <Pulldown
-                        label="カポ"
-                        value={capo}
-                        options={capoValueOptions}
-                        text={getCapoValueText}
-                        onChange={setCapo}
-                    />
-                </FormControl>
+                <PulldownContainer
+                    label="カポ"
+                    value={capo}
+                    options={capoValueOptions}
+                    text={getCapoValueText}
+                    onChange={setCapo}
+                />
 
                 <FormControl fullWidth sx={{ mb: 3 }}>
                     <InputLabel>曲のキー</InputLabel>

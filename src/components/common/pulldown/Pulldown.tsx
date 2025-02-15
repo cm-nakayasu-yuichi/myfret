@@ -1,6 +1,6 @@
 import { MenuItem, Select } from "@mui/material";
 
-interface Props<T extends number> {
+export interface PulldownProps<T extends number> {
     label: string,
     value: T;
     options: T[];
@@ -14,7 +14,7 @@ export const Pulldown = <T extends number>({
     options,
     text,
     onChange
-}: Props<T>) => {
+}: PulldownProps<T>) => {
     return (
         <Select<T>
             label={label}
