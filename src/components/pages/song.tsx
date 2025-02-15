@@ -12,11 +12,12 @@ import {
     Container,
     CircularProgress,
     Alert,
+    Button,
 } from "@mui/material";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { CapoValue, KeyValue } from "../../types";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGetSong } from "../../hooks/useGetSong";
 import { buildSongDetailHtml } from "../../utils/buildSongDetailHtml";
 import { ChordSheetBox } from "../../styles/ChordSheetBox";
@@ -29,6 +30,7 @@ interface ScrollContainerRef {
 }
 
 export const SongPage = () => {
+    const navigate = useNavigate();
     const { songId = "" } = useParams<{ songId: string }>();
     const { loading, error, result } = useGetSong(songId);
     const [capo, setCapo] = useState<CapoValue>(0);
@@ -108,10 +110,14 @@ export const SongPage = () => {
         );
     }
 
-    if (!result) {
+    if (!result || !result.body.length) {
         return (
             <Container sx={{ my: 4 }}>
-                <Alert severity="info">検索結果がありません</Alert>
+                <Typography variant="h2">404</Typography>
+                <Typography variant="h5">楽曲が見つかりません</Typography>
+                <Button variant="contained" onClick={() => navigate("/")}>
+                    ホームに戻る
+                </Button>
             </Container>
         );
     }
