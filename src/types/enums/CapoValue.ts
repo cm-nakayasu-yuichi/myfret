@@ -11,7 +11,7 @@ export const capoValueOptions: CapoValue[] = [
  * @param value チェックする対象
  * @returns カポの値が有効かどうか
  */
-export const isValidCapoValue = (value: number): value is CapoValue => {
+export const isValidCapoValue = (value?: number): value is CapoValue => {
     return capoValueOptions.includes(value as CapoValue);
 };
 

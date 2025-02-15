@@ -15,11 +15,12 @@ import {
 } from "@mui/material";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { CapoValue, KeyValue } from "../../types";
+import { CapoValue, capoValueOptions, getCapoValueText, isValidCapoValue, KeyValue } from "../../types";
 import { useParams } from "react-router-dom";
 import { useGetSong } from "../../hooks/useGetSong";
 import { buildSongDetailHtml } from "../../utils/buildSongDetailHtml";
 import { ChordSheetBox } from "../../styles/ChordSheetBox";
+import { Pulldown } from "../common/pulldown";
 
 interface ScrollContainerRef {
     scrollHeight: number;
@@ -31,7 +32,7 @@ interface ScrollContainerRef {
 export const SongPage = () => {
     const { songId = "" } = useParams<{ songId: string }>();
     const { loading, error, result } = useGetSong(songId);
-    const [capo, setCapo] = useState(0);
+    const [capo, setCapo] = useState<CapoValue>(0);
     const [key, setKey] = useState<KeyValue>(0);
     const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -63,10 +64,6 @@ export const SongPage = () => {
         }
     };
 
-    const handleCapoChange = (event: SelectChangeEvent<CapoValue>) => {
-        setCapo(event.target.value as CapoValue);
-    };
-
     const handleKeyChange = (event: SelectChangeEvent<KeyValue>) => {
         setKey(event.target.value as KeyValue);
     };
@@ -92,7 +89,7 @@ export const SongPage = () => {
 
     // カポの初期位置を設定
     useEffect(() => {
-        if (result && typeof result.capo === 'number') {
+        if (result && isValidCapoValue(result.capo)) {
             setCapo(result.capo);
         }
     }, [result]);
@@ -257,26 +254,15 @@ export const SongPage = () => {
                     flexDirection: "column",
                 }}
             >
-                <FormControl fullWidth sx={{ mb: 2 }}>
+                <FormControl fullWidth sx={{ mb: 3 }}>
                     <InputLabel>カポ</InputLabel>
-                    <Select<CapoValue>
-                        value={capo}
+                    <Pulldown
                         label="カポ"
-                        onChange={handleCapoChange}
-                    >
-                        <MenuItem value={2}>1音下げチューニング</MenuItem>
-                        <MenuItem value={1}>半音下げチューニング</MenuItem>
-                        <MenuItem value={0}>カポなし</MenuItem>
-                        <MenuItem value={-1}>カポ1</MenuItem>
-                        <MenuItem value={-2}>カポ2</MenuItem>
-                        <MenuItem value={-3}>カポ3</MenuItem>
-                        <MenuItem value={-4}>カポ4</MenuItem>
-                        <MenuItem value={-5}>カポ5</MenuItem>
-                        <MenuItem value={-6}>カポ6</MenuItem>
-                        <MenuItem value={-7}>カポ7</MenuItem>
-                        <MenuItem value={-8}>カポ8</MenuItem>
-                        <MenuItem value={-9}>カポ9</MenuItem>
-                    </Select>
+                        value={capo}
+                        options={capoValueOptions}
+                        text={getCapoValueText}
+                        onChange={setCapo}
+                    />
                 </FormControl>
 
                 <FormControl fullWidth sx={{ mb: 3 }}>
