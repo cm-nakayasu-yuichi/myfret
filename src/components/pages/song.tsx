@@ -31,7 +31,7 @@ interface ScrollContainerRef {
 export const SongPage = () => {
     const { songId = "" } = useParams<{ songId: string }>();
     const { loading, error, result } = useGetSong(songId);
-    const [capo, setCapo] = useState<CapoValue>(0);
+    const [capo, setCapo] = useState(0);
     const [key, setKey] = useState<KeyValue>(0);
     const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -89,6 +89,13 @@ export const SongPage = () => {
             window.removeEventListener("keydown", handleKeyDown);
         };
     }, []); // 空の依存配列でマウント時のみ実行
+
+    // カポの初期位置を設定
+    useEffect(() => {
+        if (result && typeof result.capo === 'number') {
+            setCapo(result.capo);
+        }
+    }, [result]);
 
     if (loading) {
         return (
