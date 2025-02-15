@@ -19,7 +19,7 @@ export const useGetHomeInfo = () => {
             try {
                 // キャッシュをチェック
                 const cachedData = cacheManager.get<HomeInfoResponse>(
-                    CacheKey.HOME_INFO,
+                    CacheKey.HOME_INFO
                 );
                 if (cachedData) {
                     setError(null);
