@@ -3,25 +3,27 @@ import {
     Typography,
     Box,
     Paper,
-    FormControl,
-    InputLabel,
-    Select,
-    MenuItem,
     IconButton,
-    SelectChangeEvent,
     Container,
     CircularProgress,
     Alert,
 } from "@mui/material";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { CapoValue, capoValueOptions, getCapoValueText, isValidCapoValue, KeyValue } from "../../types";
+import {
+    CapoValue,
+    capoValueOptions,
+    getCapoValueText,
+    isValidCapoValue,
+    SongKeyValue,
+    songKeyValueOptions,
+    getSongKeyValueText,
+} from "../../types";
 import { useParams } from "react-router-dom";
 import { useGetSong } from "../../hooks/useGetSong";
 import { buildSongDetailHtml } from "../../utils/buildSongDetailHtml";
 import { ChordSheetBox } from "../../styles/ChordSheetBox";
 import { PulldownContainer } from "../common/pulldown";
-import { getSongKeyValueText, SongKeyValue, songKeyValueOptions } from "../../types/enums/SongKeyValue";
 
 interface ScrollContainerRef {
     scrollHeight: number;
