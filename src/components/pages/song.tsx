@@ -20,7 +20,8 @@ import { useParams } from "react-router-dom";
 import { useGetSong } from "../../hooks/useGetSong";
 import { buildSongDetailHtml } from "../../utils/buildSongDetailHtml";
 import { ChordSheetBox } from "../../styles/ChordSheetBox";
-import { Pulldown, PulldownContainer } from "../common/pulldown";
+import { PulldownContainer } from "../common/pulldown";
+import { getSongKeyValueText, SongKeyValue, songKeyValueOptions } from "../../types/enums/SongKeyValue";
 
 interface ScrollContainerRef {
     scrollHeight: number;
@@ -33,7 +34,7 @@ export const SongPage = () => {
     const { songId = "" } = useParams<{ songId: string }>();
     const { loading, error, result } = useGetSong(songId);
     const [capo, setCapo] = useState<CapoValue>(0);
-    const [key, setKey] = useState<KeyValue>(0);
+    const [songKey, setSongKey] = useState<SongKeyValue>(0);
     const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
     const handleScroll = (direction: "up" | "down") => {
@@ -62,10 +63,6 @@ export const SongPage = () => {
                 behavior: "smooth",
             });
         }
-    };
-
-    const handleKeyChange = (event: SelectChangeEvent<KeyValue>) => {
-        setKey(event.target.value as KeyValue);
     };
 
     // キーボードイベントの処理を追加
@@ -261,29 +258,13 @@ export const SongPage = () => {
                     text={getCapoValueText}
                     onChange={setCapo}
                 />
-
-                <FormControl fullWidth sx={{ mb: 3 }}>
-                    <InputLabel>曲のキー</InputLabel>
-                    <Select<KeyValue>
-                        value={key}
-                        label="曲のキー"
-                        onChange={handleKeyChange}
-                    >
-                        <MenuItem value={5}>+5</MenuItem>
-                        <MenuItem value={4}>+4</MenuItem>
-                        <MenuItem value={3}>+3</MenuItem>
-                        <MenuItem value={2}>+2</MenuItem>
-                        <MenuItem value={1}>+1</MenuItem>
-                        <MenuItem value={0}>原曲キー</MenuItem>
-                        <MenuItem value={-1}>-1</MenuItem>
-                        <MenuItem value={-2}>-2</MenuItem>
-                        <MenuItem value={-3}>-3</MenuItem>
-                        <MenuItem value={-4}>-4</MenuItem>
-                        <MenuItem value={-5}>-5</MenuItem>
-                        <MenuItem value={-6}>-6</MenuItem>
-                    </Select>
-                </FormControl>
-
+                <PulldownContainer
+                    label="曲のキー"
+                    value={songKey}
+                    options={songKeyValueOptions}
+                    text={getSongKeyValueText}
+                    onChange={setSongKey}
+                />
                 {/* キャンバスエリア */}
                 <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
                     <Box

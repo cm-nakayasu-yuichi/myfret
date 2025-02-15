@@ -23,6 +23,6 @@ export const isValidCapoValue = (value?: number): value is CapoValue => {
 export const getCapoValueText = (value: CapoValue): string => {
     if (value === 2) return "1音下げチューニング";
     if (value === 1) return "半音下げチューニング";
-    if (value === 0) return "原曲キー";
+    if (value === 0) return "カポなし";
     return `カポ${Math.abs(value)}`;
 };
