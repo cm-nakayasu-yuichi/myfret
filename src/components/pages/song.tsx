@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import {
     Typography,
     Box,
@@ -30,6 +30,7 @@ import { buildSongDetailHtml } from "../../utils/buildSongDetailHtml";
 import { ChordSheetBox } from "../../styles/ChordSheetBox";
 import { PulldownContainer } from "../common/pulldown";
 import { TransposeBadge } from "../common/transpose-badge";
+import { ChordDiagram } from "../common/chord-diagram";
 
 interface ScrollContainerRef {
     scrollHeight: number;
@@ -44,6 +45,8 @@ export const SongPage = () => {
     const { loading, error, result } = useGetSong(songId);
     const [capo, setCapo] = useState<CapoValue>(0);
     const [songKey, setSongKey] = useState<SongKeyValue>(0);
+    const [showDiagram, setShowDiagram] = useState(false);
+    const [selectedChord, setSelectedChord] = useState<string | null>(null);
     const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
     const handleScroll = (direction: "up" | "down") => {
@@ -101,6 +104,11 @@ export const SongPage = () => {
         setSongKey(value);
     };
 
+    const chordClickHandler = useCallback((chordName: string) => {
+        setSelectedChord(chordName);
+        setShowDiagram(true);
+    }, []);
+
     // キーボードイベントの処理を追加
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
@@ -121,6 +129,14 @@ export const SongPage = () => {
     }, []); // 空の依存配列でマウント時のみ実行
 
     // カポの初期位置を設定
+    useEffect(() => {
+        window.chordClickHandler = chordClickHandler;
+        return () => {
+            delete window.chordClickHandler;
+        };
+    }, []);
+
+    // グローバルにハンドラを追加
     useEffect(() => {
         if (result && isValidCapoValue(result.capo)) {
             setCapo(result.capo);
@@ -335,7 +351,20 @@ export const SongPage = () => {
                             borderRadius: 1,
                             mb: 1,
                         }}
-                    />
+                    >
+                        {showDiagram && (
+                            <Box sx={{
+                                position: 'absolute',
+                                top: 0,
+                                left: 0,
+                                width: '100%',
+                                height: '100%',
+                            }}>
+                                <ChordDiagram />
+                                <Typography>{selectedChord}</Typography>
+                            </Box>
+                        )}
+                    </Box>
                     <Typography variant="caption" sx={{ textAlign: "center" }}>
                         コードをクリックすると、ここに押さえ方が表示されます
                     </Typography>
