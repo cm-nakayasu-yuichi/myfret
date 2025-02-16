@@ -18,6 +18,8 @@ import {
     SongKeyValue,
     songKeyValueOptions,
     getSongKeyValueText,
+    ChordRow,
+    transposeChord,
 } from "../../types";
 import { useParams } from "react-router-dom";
 import { useGetSong } from "../../hooks/useGetSong";
@@ -65,6 +67,33 @@ export const SongPage = () => {
                 behavior: "smooth",
             });
         }
+    };
+
+    const transpose = (semitones: number) => {
+        if (!result?.body) return;
+        result.body = result.body.map((row) => {
+            return {
+                chords: row.chords.map((chord) => {
+                    return {
+                        chordName: transposeChord(chord.chordName, semitones),
+                        cols: chord.cols,
+                        lyric: chord.lyric
+                    };
+                })
+            };
+        });
+    }
+
+    const capoChangeHandler = (value: CapoValue) => {
+        const semitones = value - capo;
+        transpose(semitones);
+        setCapo(value);
+    };
+
+    const songKeyChangeHandler = (value: SongKeyValue) => {
+        const semitones = value - songKey;
+        transpose(semitones);
+        setSongKey(value);
     };
 
     // キーボードイベントの処理を追加
@@ -232,6 +261,7 @@ export const SongPage = () => {
 
                     {/* コード譜のサンプル */}
                     <ChordSheetBox
+                        className="chord-sheet-box"
                         sx={{ ml: 6 }}
                         dangerouslySetInnerHTML={{
                             __html: buildSongDetailHtml(result)
@@ -258,14 +288,14 @@ export const SongPage = () => {
                     value={capo}
                     options={capoValueOptions}
                     text={getCapoValueText}
-                    onChange={setCapo}
+                    onChange={capoChangeHandler}
                 />
                 <PulldownContainer
                     label="曲のキー"
                     value={songKey}
                     options={songKeyValueOptions}
                     text={getSongKeyValueText}
-                    onChange={setSongKey}
+                    onChange={songKeyChangeHandler}
                 />
                 {/* キャンバスエリア */}
                 <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>

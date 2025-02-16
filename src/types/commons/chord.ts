@@ -109,7 +109,12 @@ export const parseChord = (chord: string): ChordParts | null => {
  * @param semitones 半音の数（正: 上げる、負: 下げる）
  * @returns 転調後のコード文字列
  */
-export const transposeChord = (chord: string, semitones: number): string => {
+export const transposeChord = (
+    chord: string | null,
+    semitones: number
+): string | null => {
+    if (chord === null) return null;
+
     const parts = parseChord(chord);
     if (!parts) return chord; // パースできない場合は元の文字列を返す
 
