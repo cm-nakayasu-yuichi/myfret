@@ -5,11 +5,13 @@ interface Props {
 }
 
 export const ChordDiagram = ({ }: Props) => {
+    // 幅に対して減らす高さ
+    const PADDING_BOTTOM = 34;
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
 
-    const drawDiagram = (ctx: CanvasRenderingContext2D, size: number) => {
-        ctx.clearRect(0, 0, size, size - 40);
+    const drawDiagram = (ctx: CanvasRenderingContext2D, width: number, height: number) => {
+        ctx.clearRect(0, 0, width, height);
 
         // 線の太さと色の設定
         ctx.lineWidth = 2;
@@ -78,34 +80,32 @@ export const ChordDiagram = ({ }: Props) => {
         const container = containerRef.current
         if (!canvas || !container) return;
 
-        // 親要素のサイズを取得
-        const size = container.clientWidth;
-
+        // サイズを取得
+        const width = container.clientWidth;
+        const height = width - PADDING_BOTTOM;
+        // コンテキスト作成
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
         // Canvasの解像度調整
         const dpr = window.devicePixelRatio || 1;
-        canvas.width = size * dpr;
-        canvas.height = (size - 40) * dpr;
-        canvas.style.width = `${size}px`;
-        canvas.style.height = `${size - 40}px`;
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
         ctx.scale(dpr, dpr);
 
-        drawDiagram(ctx, size);
+        drawDiagram(ctx, width, height);
     }, []);
 
     return (
-        <div ref={containerRef} style={{ width: '100%', aspectRatio: '1 / 1' }}>
+        <div ref={containerRef}>
             <canvas
                 ref={canvasRef}
                 style={{
-                    width: '100%',
-                    height: '100%',
                     backgroundColor: 'rgb(200,200,200)'
                 }}
             />
         </div>
     );
-    // return <canvas ref={canvasRef} style={{ width, height }} />;
 }
