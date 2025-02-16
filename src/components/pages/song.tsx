@@ -8,6 +8,7 @@ import {
     CircularProgress,
     Alert,
     Button,
+    Link,
 } from "@mui/material";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -193,14 +194,19 @@ export const SongPage = () => {
                             {result.title}
                         </Typography>
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                            <Typography
+                            <Link
+                                href={`/artist/${result.artist}`}
                                 sx={{
                                     color: "text.secondary",
                                     fontSize: "1rem",
+                                    textDecoration: 'none',
+                                    '&:hover': {
+                                        textDecoration: 'underline',
+                                    }
                                 }}
                             >
                                 {result.artist}
-                            </Typography>
+                            </Link>
                             <CapoBadge capoValue={capo}></CapoBadge>
                         </Box>
                     </Box>
