@@ -8,7 +8,9 @@ export const buildSongDetailHtml = (data: SongResponse) => {
         ${data.body.map(row => `
           <div class="chord-row">
             ${row.chords.map(chord => `
-              <p class="chord${!chord.chordName ? ' no-chord' : ''}">
+              <p class="chord${!chord.chordName ? ' no-chord' : ''}"
+                ${chord.chordName ? `onclick="window.chordClickHandler('${chord.chordName}')"` : ''}
+              >
                 <span class="chord-name">
                   ${chord.chordName ? `<ruby><rt>${chord.chordName}</rt></ruby>` : ''}
                 </span>
