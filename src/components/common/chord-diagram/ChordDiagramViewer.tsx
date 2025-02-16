@@ -26,7 +26,6 @@ export const ChordDiagramViewer = ({
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 width: '100%',
-                bgcolor: 'primary.light'
             }}>
                 <IconButton onClick={onPrevious} size="small">
                     <ChevronLeft />

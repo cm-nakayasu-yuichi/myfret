@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { drawBarre, drawFretNumber, drawFrets, drawMuteStringMark, drawOpenStringMark, drawPosition, drawStrings } from './utils';
 
 interface Props {
 
@@ -7,72 +8,27 @@ interface Props {
 export const ChordDiagram = ({ }: Props) => {
     // 幅に対して減らす高さ
     const PADDING_BOTTOM = 34;
+
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
 
     const drawDiagram = (ctx: CanvasRenderingContext2D, width: number, height: number) => {
         ctx.clearRect(0, 0, width, height);
+        const canvasSize = { w: width, h: height };
 
-        // 線の太さと色の設定
-        ctx.lineWidth = 2;
-        ctx.strokeStyle = '#000';
+        drawStrings(ctx, canvasSize);
+        drawFrets(ctx, canvasSize, false);
 
-        // 描画開始位置の設定
-        const startX = 40;
-        const startY = 40;
-        const fretWidth = 30;
-        const stringSpacing = 20;
+        drawBarre(ctx, canvasSize, 1, 1, 5);
 
-        // フレット線（縦線）を描画
-        for (let i = 0; i <= 5; i++) {
-            const x = startX + (i * fretWidth);
-            ctx.beginPath();
-            // 最初のフレットは二重線
-            if (i === 0) {
-                ctx.moveTo(x - 3, startY);
-                ctx.lineTo(x - 3, startY + stringSpacing * 5);
-            }
-            ctx.moveTo(x, startY);
-            ctx.lineTo(x, startY + stringSpacing * 5);
-            ctx.stroke();
-        }
+        drawPosition(ctx, canvasSize, 2, 3);
+        drawPosition(ctx, canvasSize, 3, 2);
+        drawPosition(ctx, canvasSize, 4, 3);
 
-        // 弦（横線）を描画
-        for (let i = 0; i < 6; i++) {
-            const y = startY + (i * stringSpacing);
-            ctx.beginPath();
-            ctx.moveTo(startX, y);
-            ctx.lineTo(startX + fretWidth * 5, y);
-            ctx.stroke();
-        }
+        drawOpenStringMark(ctx, canvasSize, 0);
+        drawMuteStringMark(ctx, canvasSize, 5);
 
-        // 開放弦のマーク（○）を描画
-        for (let i = 0; i < 3; i++) {
-            ctx.beginPath();
-            ctx.arc(startX - 15, startY + (i * stringSpacing), 5, 0, Math.PI * 2);
-            ctx.strokeStyle = '#000';
-            ctx.stroke();
-        }
-
-        // ポジション（黒丸）を描画
-        const positions = [
-            { string: 0, fret: 2 },  // 1弦3フレット
-            { string: 3, fret: 1 },  // 4弦2フレット
-            { string: 4, fret: 2 },  // 5弦3フレット
-        ];
-
-        positions.forEach(pos => {
-            ctx.beginPath();
-            ctx.arc(
-                startX + (pos.fret - 0.5) * fretWidth,
-                startY + pos.string * stringSpacing,
-                8,
-                0,
-                Math.PI * 2
-            );
-            ctx.fillStyle = '#000';
-            ctx.fill();
-        });
+        drawFretNumber(ctx, canvasSize, 5);
     };
 
     useEffect(() => {
@@ -103,7 +59,7 @@ export const ChordDiagram = ({ }: Props) => {
             <canvas
                 ref={canvasRef}
                 style={{
-                    backgroundColor: 'rgb(200,200,200)'
+                    // backgroundColor: 'rgb(200,200,200)'
                 }}
             />
         </div>

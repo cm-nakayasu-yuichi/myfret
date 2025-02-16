@@ -36,7 +36,7 @@ export const TestRoute = () => {
                         height: '100%',
                     }}>
                         <ChordDiagramViewer
-                            chordName='Am'
+                            chordName='Dmaj7'
                             onNext={() => { }}
                             onPrevious={() => { }}
                         />
