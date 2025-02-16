@@ -25,3 +25,14 @@ export const getSongKeyValueText = (value: SongKeyValue): string => {
     if (value > 0) return `+${value}`;
     return `${value}`;
 };
+
+/**
+ * 曲キーの表示用テキストを取得
+ * @param value 曲キーの値
+ * @returns 表示用テキスト
+ */
+export const getSongKeyBadgeText = (value: SongKeyValue): string | null => {
+    if (value === 0) return null;
+    if (value > 0) return `#${Math.abs(value)}`;
+    return `♭${Math.abs(value)}`;
+};

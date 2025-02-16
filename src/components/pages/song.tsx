@@ -21,13 +21,15 @@ import {
     songKeyValueOptions,
     getSongKeyValueText,
     transposeChord,
+    getCapoBadgeText,
+    getSongKeyBadgeText,
 } from "../../types";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetSong } from "../../hooks/useGetSong";
 import { buildSongDetailHtml } from "../../utils/buildSongDetailHtml";
 import { ChordSheetBox } from "../../styles/ChordSheetBox";
 import { PulldownContainer } from "../common/pulldown";
-import { CapoBadge } from "../common/capo-badge";
+import { TransposeBadge } from "../common/transpose-badge";
 
 interface ScrollContainerRef {
     scrollHeight: number;
@@ -207,7 +209,16 @@ export const SongPage = () => {
                             >
                                 {result.artist}
                             </Link>
-                            <CapoBadge capoValue={capo}></CapoBadge>
+                            <TransposeBadge
+                                bgcolor='primary.main'
+                                value={capo}
+                                getText={getCapoBadgeText}
+                            />
+                            <TransposeBadge
+                                bgcolor='success.main'
+                                value={songKey}
+                                getText={getSongKeyBadgeText}
+                            />
                         </Box>
                     </Box>
                     <Typography

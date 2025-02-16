@@ -34,7 +34,7 @@ export const getCapoValueText = (value: CapoValue): string => {
  */
 export const getCapoBadgeText = (value: CapoValue): string | null => {
     if (value === 2) return "1音下げ";
-    if (value === 1) return "半音下";
+    if (value === 1) return "半音下げ";
     if (value === 0) return null;
     return `カポ${Math.abs(value)}`;
 };
