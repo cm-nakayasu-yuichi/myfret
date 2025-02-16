@@ -26,3 +26,15 @@ export const getCapoValueText = (value: CapoValue): string => {
     if (value === 0) return "カポなし";
     return `カポ${Math.abs(value)}`;
 };
+
+/**
+ * カポのバッジ表示用テキストを取得
+ * @param value カポの値
+ * @returns 表示用テキスト
+ */
+export const getCapoBadgeText = (value: CapoValue): string | null => {
+    if (value === 2) return "1音下げ";
+    if (value === 1) return "半音下";
+    if (value === 0) return null;
+    return `カポ${Math.abs(value)}`;
+};

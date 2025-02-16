@@ -26,6 +26,7 @@ import { useGetSong } from "../../hooks/useGetSong";
 import { buildSongDetailHtml } from "../../utils/buildSongDetailHtml";
 import { ChordSheetBox } from "../../styles/ChordSheetBox";
 import { PulldownContainer } from "../common/pulldown";
+import { CapoBadge } from "../common/capo-badge";
 
 interface ScrollContainerRef {
     scrollHeight: number;
@@ -191,14 +192,17 @@ export const SongPage = () => {
                         >
                             {result.title}
                         </Typography>
-                        <Typography
-                            sx={{
-                                color: "text.secondary",
-                                fontSize: "1rem",
-                            }}
-                        >
-                            {result.artist}
-                        </Typography>
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                            <Typography
+                                sx={{
+                                    color: "text.secondary",
+                                    fontSize: "1rem",
+                                }}
+                            >
+                                {result.artist}
+                            </Typography>
+                            <CapoBadge capoValue={capo}></CapoBadge>
+                        </Box>
                     </Box>
                     <Typography
                         variant="body2"
