@@ -28,6 +28,8 @@ export interface SongResponse {
     artist: string;
     /** クレジット情報 */
     credit: string;
+    /** カポ */
+    capo: number;
     /** コード譜本体 */
     body: ChordRow[];
 }

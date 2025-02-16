@@ -3,12 +3,7 @@ import {
     Typography,
     Box,
     Paper,
-    FormControl,
-    InputLabel,
-    Select,
-    MenuItem,
     IconButton,
-    SelectChangeEvent,
     Container,
     CircularProgress,
     Alert,
@@ -16,11 +11,22 @@ import {
 } from "@mui/material";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { CapoValue, KeyValue } from "../../types";
+import {
+    CapoValue,
+    capoValueOptions,
+    getCapoValueText,
+    isValidCapoValue,
+    SongKeyValue,
+    songKeyValueOptions,
+    getSongKeyValueText,
+    ChordRow,
+    transposeChord,
+} from "../../types";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetSong } from "../../hooks/useGetSong";
 import { buildSongDetailHtml } from "../../utils/buildSongDetailHtml";
 import { ChordSheetBox } from "../../styles/ChordSheetBox";
+import { PulldownContainer } from "../common/pulldown";
 
 interface ScrollContainerRef {
     scrollHeight: number;
@@ -34,7 +40,7 @@ export const SongPage = () => {
     const { songId = "" } = useParams<{ songId: string }>();
     const { loading, error, result } = useGetSong(songId);
     const [capo, setCapo] = useState<CapoValue>(0);
-    const [key, setKey] = useState<KeyValue>(0);
+    const [songKey, setSongKey] = useState<SongKeyValue>(0);
     const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
     const handleScroll = (direction: "up" | "down") => {
@@ -65,12 +71,31 @@ export const SongPage = () => {
         }
     };
 
-    const handleCapoChange = (event: SelectChangeEvent<CapoValue>) => {
-        setCapo(event.target.value as CapoValue);
+    const transpose = (semitones: number) => {
+        if (!result?.body) return;
+        result.body = result.body.map((row) => {
+            return {
+                chords: row.chords.map((chord) => {
+                    return {
+                        chordName: transposeChord(chord.chordName, semitones),
+                        cols: chord.cols,
+                        lyric: chord.lyric
+                    };
+                })
+            };
+        });
+    }
+
+    const capoChangeHandler = (value: CapoValue) => {
+        const semitones = value - capo;
+        transpose(semitones);
+        setCapo(value);
     };
 
-    const handleKeyChange = (event: SelectChangeEvent<KeyValue>) => {
-        setKey(event.target.value as KeyValue);
+    const songKeyChangeHandler = (value: SongKeyValue) => {
+        const semitones = value - songKey;
+        transpose(semitones);
+        setSongKey(value);
     };
 
     // キーボードイベントの処理を追加
@@ -91,6 +116,13 @@ export const SongPage = () => {
             window.removeEventListener("keydown", handleKeyDown);
         };
     }, []); // 空の依存配列でマウント時のみ実行
+
+    // カポの初期位置を設定
+    useEffect(() => {
+        if (result && isValidCapoValue(result.capo)) {
+            setCapo(result.capo);
+        }
+    }, [result]);
 
     if (loading) {
         return (
@@ -235,6 +267,7 @@ export const SongPage = () => {
 
                     {/* コード譜のサンプル */}
                     <ChordSheetBox
+                        className="chord-sheet-box"
                         sx={{ ml: 6 }}
                         dangerouslySetInnerHTML={{
                             __html: buildSongDetailHtml(result)
@@ -256,50 +289,20 @@ export const SongPage = () => {
                     flexDirection: "column",
                 }}
             >
-                <FormControl fullWidth sx={{ mb: 2 }}>
-                    <InputLabel>カポ</InputLabel>
-                    <Select<CapoValue>
-                        value={capo}
-                        label="カポ"
-                        onChange={handleCapoChange}
-                    >
-                        <MenuItem value={2}>1音下げチューニング</MenuItem>
-                        <MenuItem value={1}>半音下げチューニング</MenuItem>
-                        <MenuItem value={0}>カポなし</MenuItem>
-                        <MenuItem value={-1}>カポ1</MenuItem>
-                        <MenuItem value={-2}>カポ2</MenuItem>
-                        <MenuItem value={-3}>カポ3</MenuItem>
-                        <MenuItem value={-4}>カポ4</MenuItem>
-                        <MenuItem value={-5}>カポ5</MenuItem>
-                        <MenuItem value={-6}>カポ6</MenuItem>
-                        <MenuItem value={-7}>カポ7</MenuItem>
-                        <MenuItem value={-8}>カポ8</MenuItem>
-                        <MenuItem value={-9}>カポ9</MenuItem>
-                    </Select>
-                </FormControl>
-
-                <FormControl fullWidth sx={{ mb: 3 }}>
-                    <InputLabel>曲のキー</InputLabel>
-                    <Select<KeyValue>
-                        value={key}
-                        label="曲のキー"
-                        onChange={handleKeyChange}
-                    >
-                        <MenuItem value={5}>+5</MenuItem>
-                        <MenuItem value={4}>+4</MenuItem>
-                        <MenuItem value={3}>+3</MenuItem>
-                        <MenuItem value={2}>+2</MenuItem>
-                        <MenuItem value={1}>+1</MenuItem>
-                        <MenuItem value={0}>原曲キー</MenuItem>
-                        <MenuItem value={-1}>-1</MenuItem>
-                        <MenuItem value={-2}>-2</MenuItem>
-                        <MenuItem value={-3}>-3</MenuItem>
-                        <MenuItem value={-4}>-4</MenuItem>
-                        <MenuItem value={-5}>-5</MenuItem>
-                        <MenuItem value={-6}>-6</MenuItem>
-                    </Select>
-                </FormControl>
-
+                <PulldownContainer
+                    label="カポ"
+                    value={capo}
+                    options={capoValueOptions}
+                    text={getCapoValueText}
+                    onChange={capoChangeHandler}
+                />
+                <PulldownContainer
+                    label="曲のキー"
+                    value={songKey}
+                    options={songKeyValueOptions}
+                    text={getSongKeyValueText}
+                    onChange={songKeyChangeHandler}
+                />
                 {/* キャンバスエリア */}
                 <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
                     <Box
