@@ -1,6 +1,6 @@
 export * from "./commons/APIState";
 export * from "./commons/SelectOption";
-export * from "./commons/Chord";
+export * from "./commons/chord";
 
 export * from "./enums/SearchType";
 export * from "./enums/CapoValue";
