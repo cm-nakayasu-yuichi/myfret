@@ -19,7 +19,6 @@ import {
     SongKeyValue,
     songKeyValueOptions,
     getSongKeyValueText,
-    ChordRow,
     transposeChord,
 } from "../../types";
 import { useNavigate, useParams } from "react-router-dom";
