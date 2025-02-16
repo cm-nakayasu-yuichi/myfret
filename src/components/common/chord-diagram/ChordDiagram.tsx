@@ -9,7 +9,7 @@ export const ChordDiagram = ({ }: Props) => {
     const containerRef = useRef<HTMLDivElement>(null);
 
     const drawDiagram = (ctx: CanvasRenderingContext2D, size: number) => {
-        ctx.clearRect(0, 0, size, size);
+        ctx.clearRect(0, 0, size, size - 40);
 
         // 線の太さと色の設定
         ctx.lineWidth = 2;
@@ -87,9 +87,9 @@ export const ChordDiagram = ({ }: Props) => {
         // Canvasの解像度調整
         const dpr = window.devicePixelRatio || 1;
         canvas.width = size * dpr;
-        canvas.height = size * dpr;
+        canvas.height = (size - 40) * dpr;
         canvas.style.width = `${size}px`;
-        canvas.style.height = `${size}px`;
+        canvas.style.height = `${size - 40}px`;
         ctx.scale(dpr, dpr);
 
         drawDiagram(ctx, size);

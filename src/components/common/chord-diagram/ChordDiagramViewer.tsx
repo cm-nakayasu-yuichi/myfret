@@ -14,27 +14,38 @@ export const ChordDiagramViewer = ({
     onNext,
 }: Props) => {
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100%' }}>
+        <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            height: '100%',
+            width: '100%',
+        }}>
             {/* ヘッダー部分 */}
             <Box sx={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                mb: 2
+                width: '100%',
+                bgcolor: 'primary.light'
             }}>
-                <IconButton onClick={onPrevious}>
+                <IconButton onClick={onPrevious} size="small">
                     <ChevronLeft />
                 </IconButton>
-                <Typography variant="h6" component="div">
+                <Typography variant="h6">
                     {chordName}
                 </Typography>
-                <IconButton onClick={onNext}>
+                <IconButton onClick={onNext} size="small">
                     <ChevronRight />
                 </IconButton>
             </Box>
 
             {/* ダイアグラム部分 */}
-            <Box sx={{ flex: 1, position: 'relative', p: 2 }}>
+            <Box sx={{
+                flex: 1,
+                position: 'relative',
+                width: '100%',
+                aspectRatio: '1 / 1',
+            }}>
                 <ChordDiagram />
             </Box>
         </Box>
