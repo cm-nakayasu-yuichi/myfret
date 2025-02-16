@@ -34,7 +34,7 @@ export const ChordDiagramViewer = ({
             </Box>
 
             {/* ダイアグラム部分 */}
-            <Box sx={{ flex: 1, position: 'relative' }}>
+            <Box sx={{ flex: 1, position: 'relative', p: 2 }}>
                 <ChordDiagram />
             </Box>
         </Box>

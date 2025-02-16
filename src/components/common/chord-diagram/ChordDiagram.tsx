@@ -1,15 +1,15 @@
 import { useEffect, useRef } from 'react';
 
 interface Props {
-    width?: number;
-    height?: number;
+
 }
 
-export const ChordDiagram = ({ width = 200, height = 250 }: Props) => {
+export const ChordDiagram = ({ }: Props) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
 
-    const drawDiagram = (ctx: CanvasRenderingContext2D) => {
-        ctx.clearRect(0, 0, width, height);
+    const drawDiagram = (ctx: CanvasRenderingContext2D, size: number) => {
+        ctx.clearRect(0, 0, size, size);
 
         // 線の太さと色の設定
         ctx.lineWidth = 2;
@@ -75,21 +75,37 @@ export const ChordDiagram = ({ width = 200, height = 250 }: Props) => {
 
     useEffect(() => {
         const canvas = canvasRef.current;
-        if (!canvas) return;
+        const container = containerRef.current
+        if (!canvas || !container) return;
+
+        // 親要素のサイズを取得
+        const size = container.clientWidth;
 
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
         // Canvasの解像度調整
         const dpr = window.devicePixelRatio || 1;
-        canvas.width = width * dpr;
-        canvas.height = height * dpr;
-        canvas.style.width = `${width}px`;
-        canvas.style.height = `${height}px`;
+        canvas.width = size * dpr;
+        canvas.height = size * dpr;
+        canvas.style.width = `${size}px`;
+        canvas.style.height = `${size}px`;
         ctx.scale(dpr, dpr);
 
-        drawDiagram(ctx);
-    }, [width, height]);
+        drawDiagram(ctx, size);
+    }, []);
 
-    return <canvas ref={canvasRef} style={{ width, height }} />;
+    return (
+        <div ref={containerRef} style={{ width: '100%', aspectRatio: '1 / 1' }}>
+            <canvas
+                ref={canvasRef}
+                style={{
+                    width: '100%',
+                    height: '100%',
+                    backgroundColor: 'rgb(200,200,200)'
+                }}
+            />
+        </div>
+    );
+    // return <canvas ref={canvasRef} style={{ width, height }} />;
 }
