@@ -30,7 +30,7 @@ import { buildSongDetailHtml } from "../../utils/buildSongDetailHtml";
 import { ChordSheetBox } from "../../styles/ChordSheetBox";
 import { PulldownContainer } from "../common/pulldown";
 import { TransposeBadge } from "../common/transpose-badge";
-import { ChordDiagram } from "../common/chord-diagram";
+import { ChordDiagram, ChordDiagramViewer } from "../common/chord-diagram";
 
 interface ScrollContainerRef {
     scrollHeight: number;
@@ -360,8 +360,11 @@ export const SongPage = () => {
                                 width: '100%',
                                 height: '100%',
                             }}>
-                                <ChordDiagram />
-                                <Typography>{selectedChord}</Typography>
+                                <ChordDiagramViewer
+                                    chordName={selectedChord}
+                                    onNext={() => { }}
+                                    onPrevious={() => { }}
+                                />
                             </Box>
                         )}
                     </Box>
