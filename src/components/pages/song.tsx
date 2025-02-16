@@ -30,7 +30,7 @@ import { buildSongDetailHtml } from "../../utils/buildSongDetailHtml";
 import { ChordSheetBox } from "../../styles/ChordSheetBox";
 import { PulldownContainer } from "../common/pulldown";
 import { TransposeBadge } from "../common/transpose-badge";
-import { ChordDiagram, ChordDiagramViewer } from "../common/chord-diagram";
+import { ChordDiagramViewer } from "../common/chord-diagram";
 
 interface ScrollContainerRef {
     scrollHeight: number;
@@ -45,7 +45,6 @@ export const SongPage = () => {
     const { loading, error, result } = useGetSong(songId);
     const [capo, setCapo] = useState<CapoValue>(0);
     const [songKey, setSongKey] = useState<SongKeyValue>(0);
-    const [showDiagram, setShowDiagram] = useState(false);
     const [selectedChord, setSelectedChord] = useState<string | null>(null);
     const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -106,7 +105,6 @@ export const SongPage = () => {
 
     const chordClickHandler = useCallback((chordName: string) => {
         setSelectedChord(chordName);
-        setShowDiagram(true);
     }, []);
 
     // キーボードイベントの処理を追加
@@ -352,7 +350,7 @@ export const SongPage = () => {
                             mb: 1,
                         }}
                     >
-                        {showDiagram && (
+                        {selectedChord && (
                             <Box sx={{
                                 position: 'absolute',
                                 top: 0,
