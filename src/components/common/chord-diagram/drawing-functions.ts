@@ -1,11 +1,5 @@
-import {
-    FRET_NUM,
-    LEFT_MARK_SIZE,
-    LINE_WIDTH,
-    STRING_ESCESS_WIDTH,
-    STRING_NUM,
-} from "./constants";
-import { rectToEdge, Size } from "./dimensions";
+import { FRET_NUM, LEFT_MARK_SIZE, LINE_WIDTH, STRING_NUM } from "./constants";
+import { Size } from "./dimensions";
 import { drawCircle, drawCross, drawLine, drawText } from "./drawing-base";
 import {
     getBottomTextRect,
@@ -13,6 +7,7 @@ import {
     getLeftMarkRect,
     getPositionMarkRect,
 } from "./rect-calculation";
+import { getFretInterval, getStringInterval, rectToEdge } from "./utilities";
 
 /**
  * 指ポジションを描画する
@@ -21,7 +16,6 @@ import {
  * @param string 弦
  * @param fret フレット
  * @param color 色
- * @param lineWidth
  */
 export const drawPosition = (
     ctx: CanvasRenderingContext2D,
@@ -30,8 +24,8 @@ export const drawPosition = (
     fret: number,
     color: string = "#000"
 ) => {
-    const rect = getPositionMarkRect(canvasSize, string, fret);
-    drawCircle(ctx, rect, rect.w, color);
+    const positionMarkRect = getPositionMarkRect(canvasSize, string, fret);
+    drawCircle(ctx, positionMarkRect, positionMarkRect.w, color);
 };
 
 /**
@@ -73,9 +67,7 @@ export const drawBarre = (
 /**
  * すべての弦を描画する
  * @param ctx コンテキスト
- * @param start 開始位置
- * @param end 終了位置
- * @param lineWidth 線の幅
+ * @param canvasSize キャンバスサイズ
  * @param color 色
  */
 export const drawStrings = (
@@ -85,10 +77,10 @@ export const drawStrings = (
 ) => {
     const fingerboardRect = getFingerboardRect(canvasSize);
     const fingerboardEdge = rectToEdge(fingerboardRect);
-    const interval = fingerboardRect.h / (STRING_NUM - 1);
+    const stringInterval = getStringInterval(canvasSize);
 
     for (let i = 0; i < STRING_NUM; i++) {
-        const y = fingerboardEdge.t + i * interval;
+        const y = fingerboardEdge.t + i * stringInterval;
         drawLine(
             ctx,
             { x: fingerboardEdge.l, y: y },
@@ -105,7 +97,6 @@ export const drawStrings = (
  * @param canvasSize キャンバスサイズ
  * @param isFret0 左端が0フレットか (二重線にするかどうか)
  * @param color 色
- * @param lineWidth 線の幅
  */
 export const drawFrets = (
     ctx: CanvasRenderingContext2D,
@@ -115,10 +106,10 @@ export const drawFrets = (
 ) => {
     const fingerboardRect = getFingerboardRect(canvasSize);
     const fingerboardEdge = rectToEdge(fingerboardRect);
-    const interval = (fingerboardRect.w - STRING_ESCESS_WIDTH) / (FRET_NUM - 1);
+    const fretInterval = getFretInterval(canvasSize);
 
     for (let i = 0; i < FRET_NUM; i++) {
-        const x = fingerboardEdge.l + i * interval;
+        const x = fingerboardEdge.l + i * fretInterval;
         drawLine(
             ctx,
             { x: x, y: fingerboardEdge.t },
@@ -144,16 +135,16 @@ export const drawFrets = (
  * 開放弦マークを描画する
  * @param ctx コンテキスト
  * @param canvasSize キャンバスサイズ
- * @param index インデックス
+ * @param string 弦
  * @param color 色
  */
 export const drawOpenStringMark = (
     ctx: CanvasRenderingContext2D,
     canvasSize: Size,
-    index: number,
+    string: number,
     color: string = "#000"
 ) => {
-    const leftMarkRect = getLeftMarkRect(canvasSize, index);
+    const leftMarkRect = getLeftMarkRect(canvasSize, string);
     drawCircle(
         ctx,
         { x: leftMarkRect.x, y: leftMarkRect.y },
@@ -167,16 +158,16 @@ export const drawOpenStringMark = (
  * ミュートマークを描画する
  * @param ctx コンテキスト
  * @param canvasSize キャンバスサイズ
- * @param index インデックス
+ * @param string 弦
  * @param color 色
  */
 export const drawMuteStringMark = (
     ctx: CanvasRenderingContext2D,
     canvasSize: Size,
-    index: number,
+    string: number,
     color: string = "#000"
 ) => {
-    const leftMarkRect = getLeftMarkRect(canvasSize, index);
+    const leftMarkRect = getLeftMarkRect(canvasSize, string);
     drawCross(ctx, leftMarkRect, color);
 };
 

@@ -37,31 +37,3 @@ export interface Edge {
     /** 下端の位置 */
     b: number;
 }
-
-/**
- * RectをEdgeに変換
- * @param rect Rect
- * @returns Edge
- */
-export const rectToEdge = (rect: Rect): Edge => {
-    return {
-        l: rect.x,
-        t: rect.y,
-        r: rect.x + rect.w,
-        b: rect.y + rect.h,
-    };
-};
-
-/**
- * EdgeをRectに変換
- * @param edge Edge
- * @returns Rect
- */
-export const edgeToRect = (edge: Edge): Rect => {
-    return {
-        x: edge.l,
-        y: edge.t,
-        w: edge.r - edge.l,
-        h: edge.b - edge.t,
-    };
-};

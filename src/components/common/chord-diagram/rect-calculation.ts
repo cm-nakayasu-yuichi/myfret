@@ -1,7 +1,6 @@
 import {
     END_X,
     END_Y,
-    FRET_NUM,
     FRET_NUMBER_INTERVAL,
     FRET_NUMBER_SIZE,
     LEFT_MARK_INTERVAL,
@@ -9,10 +8,9 @@ import {
     POSITION_MARK_RATIO,
     START_X,
     START_Y,
-    STRING_ESCESS_WIDTH,
-    STRING_NUM,
 } from "./constants";
-import { Rect, Size, rectToEdge } from "./dimensions";
+import { Rect, Size } from "./dimensions";
+import { getFretInterval, getStringInterval, rectToEdge } from "./utilities";
 
 /**
  * 指板の座標サイズを取得する
@@ -42,9 +40,8 @@ export const getPositionMarkRect = (
 ): Rect => {
     const fingerboardRect = getFingerboardRect(canvasSize);
     const fingerboardEdge = rectToEdge(fingerboardRect);
-    const stringInterval = fingerboardRect.h / (STRING_NUM - 1);
-    const fretInterval =
-        (fingerboardRect.w - STRING_ESCESS_WIDTH) / (FRET_NUM - 1);
+    const stringInterval = getStringInterval(canvasSize);
+    const fretInterval = getFretInterval(canvasSize);
     const markWidth = fretInterval * POSITION_MARK_RATIO;
     const markOffsetX = fretInterval / 2; // フレット間における中央の位置を計算
 
@@ -68,7 +65,7 @@ export const getPositionMarkRect = (
 export const getLeftMarkRect = (canvasSize: Size, string: number): Rect => {
     const fingerboardRect = getFingerboardRect(canvasSize);
     const fingerboardEdge = rectToEdge(fingerboardRect);
-    const stringInterval = fingerboardRect.h / (STRING_NUM - 1);
+    const stringInterval = getStringInterval(canvasSize);
     return {
         x: fingerboardEdge.l - LEFT_MARK_SIZE - LEFT_MARK_INTERVAL,
         y: fingerboardEdge.t + (string - 1) * stringInterval,
@@ -86,8 +83,7 @@ export const getLeftMarkRect = (canvasSize: Size, string: number): Rect => {
 export const getBottomTextRect = (canvasSize: Size, fret: number): Rect => {
     const fingerboardRect = getFingerboardRect(canvasSize);
     const fingerboardEdge = rectToEdge(fingerboardRect);
-    const fretInterval =
-        (fingerboardRect.w - STRING_ESCESS_WIDTH) / (FRET_NUM - 1);
+    const fretInterval = getFretInterval(canvasSize);
     const markOffsetX = fretInterval / 2; // フレット間における中央の位置を計算
     return {
         x: fingerboardEdge.l + markOffsetX + (fret - 1) * fretInterval,

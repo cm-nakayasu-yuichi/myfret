@@ -25,8 +25,8 @@ export const drawDiagram = (
     drawPosition(ctx, canvasSize, 3, 2);
     drawPosition(ctx, canvasSize, 4, 3);
 
-    drawOpenStringMark(ctx, canvasSize, 0);
-    drawMuteStringMark(ctx, canvasSize, 5);
+    drawOpenStringMark(ctx, canvasSize, 1);
+    drawMuteStringMark(ctx, canvasSize, 6);
 
     drawFretNumber(ctx, canvasSize, 5);
 };
