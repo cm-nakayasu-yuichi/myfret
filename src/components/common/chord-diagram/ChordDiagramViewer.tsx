@@ -4,15 +4,25 @@ import { ChordDiagram } from "./ChordDiagram";
 
 interface Props {
     chordName: string | null;
-    onPrevious: () => void;
-    onNext: () => void;
 }
 
-export const ChordDiagramViewer = ({
-    chordName,
-    onPrevious,
-    onNext,
-}: Props) => {
+export const ChordDiagramViewer = ({ chordName }: Props) => {
+    const prevHandler = () => {
+        if (index - 1 < 0) {
+            setIndex(positions.length - 1);
+        } else {
+            setIndex(index - 1);
+        }
+    };
+
+    const nextHandler = () => {
+        if (index + 1 >= positions.length) {
+            setIndex(0);
+        } else {
+            setIndex(index + 1);
+        }
+    };
+
     return (
         <Box sx={{
             display: 'flex',
@@ -27,13 +37,13 @@ export const ChordDiagramViewer = ({
                 justifyContent: 'space-between',
                 width: '100%',
             }}>
-                <IconButton onClick={onPrevious} size="small">
+                <IconButton onClick={prevHandler} size="small">
                     <ChevronLeft />
                 </IconButton>
                 <Typography variant="h6">
                     {chordName}
                 </Typography>
-                <IconButton onClick={onNext} size="small">
+                <IconButton onClick={nextHandler} size="small">
                     <ChevronRight />
                 </IconButton>
             </Box>
