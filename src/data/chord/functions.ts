@@ -119,7 +119,7 @@ export const isValidNote = (note: string): note is Note => {
  * @param chord コード文字列 (例: "Cm/G")
  * @returns ChordPositionの配列
  */
-export function getChordPositions(chord: string): ChordPosition[] {
+export const getChordPositions = (chord: string): ChordPosition[] => {
     const chordParts = parseChord(chord);
     if (chordParts === null) {
         return [];
@@ -133,5 +133,52 @@ export function getChordPositions(chord: string): ChordPosition[] {
         positions.push(openPosition);
     }
 
+    // 基本フォームを持つコードを探して派生系を作る
+    const modifier = chordParts.modifier;
+    for (const note of NOTES) {
+        const position = OPEN_POSITIONS[modifier]?.[note];
+        if (position?.barres?.length === 1) {
+            // 基本フォームから目的のコードまでのフレット差を計算
+            const offset = getNoteOffset(note, chordParts.keyNote);
+            if (offset > 0) {
+                // 派生系のポジションを作成
+                positions.push(shiftPosition(position, offset));
+            }
+        }
+    }
+
     return positions;
-}
+};
+
+/**
+ * フレット差分を計算する
+ * @param from
+ * @param to
+ * @returns
+ */
+const getNoteOffset = (from: string, to: string): number => {
+    const fromIndex = NOTES.indexOf(from);
+    const toIndex = NOTES.indexOf(to);
+    if (fromIndex === -1 || toIndex === -1) return 0;
+
+    return (toIndex - fromIndex + 12) % 12;
+};
+
+/**
+ * ポジションをシフトする
+ * @param position
+ * @param offset
+ * @returns
+ */
+const shiftPosition = (
+    position: ChordPosition,
+    offset: number
+): ChordPosition => {
+    return {
+        frets: position.frets.map((fret) => (fret >= 0 ? fret + offset : fret)),
+        barres: position.barres?.map((barre) => ({
+            fret: barre.fret + offset,
+            strings: [...barre.strings],
+        })),
+    };
+};
