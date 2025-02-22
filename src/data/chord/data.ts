@@ -14,7 +14,7 @@ export const OPEN_POSITIONS: Record<
     "major": {
         "C":  { frets: [0, 1, 0, 2, 3, 0], barres: [{ fret: 0, strings: [1, 5] }] },
         "C#": null,
-        "D":  { frets: [2, 3, 2, 0, -1, -1], barres: [{ fret: 0, strings: [1, 4] }] },
+        "D":  { frets: [2, 3, 2, 0, -1, -1], barres: [{ fret: 0, strings: [4, 4] }] },
         "D#": null,
         "E":  { frets: [0, 0, 1, 2, 2, 0], barres: [{ fret: 0, strings: [1, 6] }] },
         "F":  null,
