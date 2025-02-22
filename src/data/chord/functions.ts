@@ -1,5 +1,6 @@
 import { Note, NOTE_MAPPINGS } from "./constants";
-import { ChordParts } from "./interfaces";
+import { OPEN_POSITIONS } from "./data";
+import { ChordParts, ChordPosition } from "./interfaces";
 
 /**
  * 音階のインデックスを取得
@@ -112,3 +113,25 @@ export const transposeChord = (
 export const isValidNote = (note: string): note is Note => {
     return NOTE_MAPPINGS.flat().includes(note as Note);
 };
+
+/**
+ * コードのポジションを取得する
+ * @param chord コード文字列 (例: "Cm/G")
+ * @returns ChordPositionの配列
+ */
+export function getChordPositions(chord: string): ChordPosition[] {
+    const chordParts = parseChord(chord);
+    if (chordParts === null) {
+        return [];
+    }
+    const positions: ChordPosition[] = [];
+
+    // オープンコードの取得
+    const openPosition =
+        OPEN_POSITIONS[chordParts.modifier]?.[chordParts.keyNote];
+    if (openPosition) {
+        positions.push(openPosition);
+    }
+
+    return positions;
+}
