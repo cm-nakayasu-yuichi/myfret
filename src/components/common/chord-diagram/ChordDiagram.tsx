@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { drawDiagram } from './frawing-main';
+import { drawDiagram } from './drawing-main';
 
 interface Props {
 
