@@ -12,16 +12,16 @@ export const OPEN_POSITIONS: Record<
     Record<string, ChordPosition | null>
 > = {
     "": {
-        "C":  { frets: [0, 1, 0, 2, 3, 0] },
+        "C":  { frets: [0, 1, 0, 2, 3, 0], barres: [{ fret: 0, strings: [1, 5] }] },
         "C#": null,
-        "D":  { frets: [2, 3, 2, 0, -1, -1] },
+        "D":  { frets: [2, 3, 2, 0, -1, -1], barres: [{ fret: 0, strings: [1, 4] }] },
         "D#": null,
-        "E":  { frets: [0, 0, 1, 2, 2, 0] },
+        "E":  { frets: [0, 0, 1, 2, 2, 0], barres: [{ fret: 0, strings: [1, 6] }] },
         "F":  null,
         "F#": null,
         "G":  { frets: [3, 0, 0, 0, 2, 3] },
         "G#": null,
-        "A":  { frets: [0, 2, 2, 2, 0, -1] },
+        "A":  { frets: [0, 2, 2, 2, 0, -1], barres: [{ fret: 0, strings: [1, 5] }] },
         "A#": null,
         "B":  null,
     },
