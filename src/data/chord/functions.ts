@@ -1,6 +1,6 @@
 import { Note, NOTE_MAPPINGS } from "./constants";
 import { OPEN_POSITIONS } from "./data";
-import { ChordParts, ChordPosition } from "./interfaces";
+import { ChordParts, ChordPattern, ChordPosition } from "./interfaces";
 
 /**
  * 音階のインデックスを取得
@@ -112,6 +112,18 @@ export const transposeChord = (
 
 export const isValidNote = (note: string): note is Note => {
     return NOTE_MAPPINGS.flat().includes(note as Note);
+};
+
+/**
+ * ギターコードとポジションのパターンを取得する
+ * @param chord コード文字列 (例: "Cm/G")
+ * @returns ギターコードとポジションのパターン
+ */
+export const getChordPattern = (chord: string): ChordPattern => {
+    return {
+        name: chord,
+        positions: getChordPositions(chord),
+    };
 };
 
 /**
