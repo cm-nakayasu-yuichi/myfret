@@ -39,9 +39,6 @@ export const ChordDiagram = ({ }: Props) => {
         <div ref={containerRef}>
             <canvas
                 ref={canvasRef}
-                style={{
-                    // backgroundColor: 'rgb(200,200,200)'
-                }}
             />
         </div>
     );
