@@ -1,12 +1,30 @@
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import { Box, IconButton, Typography } from "@mui/material";
 import { ChordDiagram } from "./ChordDiagram";
+import { useEffect, useState } from "react";
+import { ChordPosition, getChordPositions } from "../../../data/chord";
 
 interface Props {
     chordName: string | null;
 }
 
 export const ChordDiagramViewer = ({ chordName }: Props) => {
+    const [positions, setPositions] = useState<ChordPosition[]>(() =>
+        chordName ? getChordPositions(chordName) : []
+    );
+    const [index, setIndex] = useState<number>(0);
+
+    useEffect(() => {
+        if (!chordName) {
+            setPositions([]);
+            setIndex(0);
+            return;
+        }
+        const newPositions = getChordPositions(chordName);
+        setPositions(newPositions);
+        setIndex(0);
+    }, [chordName]);
+
     const prevHandler = () => {
         if (index - 1 < 0) {
             setIndex(positions.length - 1);
@@ -55,7 +73,9 @@ export const ChordDiagramViewer = ({ chordName }: Props) => {
                 width: '100%',
                 aspectRatio: '1 / 1',
             }}>
-                <ChordDiagram />
+                <ChordDiagram
+                    position={positions[index]}
+                />
             </Box>
         </Box>
     );

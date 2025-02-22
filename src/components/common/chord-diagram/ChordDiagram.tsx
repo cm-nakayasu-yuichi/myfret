@@ -1,11 +1,12 @@
 import { useEffect, useRef } from 'react';
 import { drawDiagram } from './drawing-main';
+import { ChordPosition } from '../../../data/chord';
 
 interface Props {
-
+    position: ChordPosition
 }
 
-export const ChordDiagram = ({ }: Props) => {
+export const ChordDiagram = ({ position }: Props) => {
     // 幅に対して減らす高さ
     const PADDING_BOTTOM = 34;
 
@@ -33,7 +34,7 @@ export const ChordDiagram = ({ }: Props) => {
         ctx.scale(dpr, dpr);
 
         drawDiagram(ctx, width, height);
-    }, []);
+    }, [position]);
 
     return (
         <div ref={containerRef}>
