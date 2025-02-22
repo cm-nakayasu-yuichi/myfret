@@ -1,5 +1,6 @@
 import { FRET_NUMBER_SIZE } from "./constants";
-import { Point, Rect, rectToEdge } from "./dimensions";
+import { Point, Rect } from "./dimensions";
+import { rectToEdge } from "./utilities";
 
 /**
  * 直線を描画する
