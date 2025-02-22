@@ -360,8 +360,6 @@ export const SongPage = () => {
                             }}>
                                 <ChordDiagramViewer
                                     chordName={selectedChord}
-                                    onNext={() => { }}
-                                    onPrevious={() => { }}
                                 />
                             </Box>
                         )}
