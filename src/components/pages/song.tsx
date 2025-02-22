@@ -20,10 +20,10 @@ import {
     SongKeyValue,
     songKeyValueOptions,
     getSongKeyValueText,
-    transposeChord,
     getCapoBadgeText,
     getSongKeyBadgeText,
 } from "../../types";
+import { transposeChord } from "../../data/chord";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetSong } from "../../hooks/useGetSong";
 import { buildSongDetailHtml } from "../../utils/buildSongDetailHtml";

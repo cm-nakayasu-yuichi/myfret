@@ -5,7 +5,7 @@ import {
     isValidNote,
     parseChord,
     transposeChord,
-} from "../../../src/types";
+} from "../../../src/data/chord";
 
 describe("インデックスの正規化(getNormalizedIndex)のテスト", () => {
     describe("正の数の場合", () => {

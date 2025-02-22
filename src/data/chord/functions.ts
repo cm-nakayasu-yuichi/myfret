@@ -1,29 +1,5 @@
-/** 音階の定義（異名同音を含む） */
-const NOTE_MAPPINGS = [
-    ["A"],
-    ["A#", "B♭"],
-    ["B"],
-    ["C"],
-    ["C#", "D♭"],
-    ["D"],
-    ["D#", "E♭"],
-    ["E"],
-    ["F"],
-    ["F#", "G♭"],
-    ["G"],
-    ["G#", "A♭"],
-] as const;
-
-// 型定義を追加
-type NoteMapping = (typeof NOTE_MAPPINGS)[number];
-type Note = NoteMapping[number];
-
-/** コード情報 */
-interface ChordParts {
-    keyNote: string; // キー音
-    modifier: string; // コード修飾
-    bassNote: string; // ベース音（オプション）
-}
+import { Note, NOTE_MAPPINGS } from "./constants";
+import { ChordParts } from "./interfaces";
 
 /**
  * 音階のインデックスを取得
