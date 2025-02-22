@@ -33,7 +33,7 @@ export const ChordDiagram = ({ position }: Props) => {
         canvas.style.height = `${height}px`;
         ctx.scale(dpr, dpr);
 
-        drawDiagram(ctx, width, height);
+        drawDiagram(position, ctx, width, height);
     }, [position]);
 
     return (

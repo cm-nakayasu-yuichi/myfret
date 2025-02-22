@@ -197,8 +197,8 @@ const shiftPosition = (
     offset: number
 ): ChordPosition => {
     return {
-        // フレットパターンはそのまま維持
-        frets: [...position.frets],
+        // フレットはセーハを加味して+1しておく(開放弦、ミュートを除く)
+        frets: position.frets.map((fret) => (fret > 0 ? fret + 1 : fret)),
         // barresのフレット位置だけをシフト
         barres: position.barres?.map((barre) => ({
             fret: barre.fret + offset,
