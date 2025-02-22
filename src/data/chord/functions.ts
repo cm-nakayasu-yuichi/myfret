@@ -135,17 +135,15 @@ export const getChordPositions = (chord: string): ChordPosition[] => {
 
     // 基本フォームを持つコードを探して派生系を作る
     const modifier = chordParts.modifier;
-    for (const note of NOTES) {
+    Object.keys(OPEN_POSITIONS[modifier] || {}).forEach((note) => {
         const position = OPEN_POSITIONS[modifier]?.[note];
         if (position?.barres?.length === 1) {
-            // 基本フォームから目的のコードまでのフレット差を計算
             const offset = getNoteOffset(note, chordParts.keyNote);
             if (offset > 0) {
-                // 派生系のポジションを作成
                 positions.push(shiftPosition(position, offset));
             }
         }
-    }
+    });
 
     return positions;
 };
@@ -157,8 +155,8 @@ export const getChordPositions = (chord: string): ChordPosition[] => {
  * @returns
  */
 const getNoteOffset = (from: string, to: string): number => {
-    const fromIndex = NOTES.indexOf(from);
-    const toIndex = NOTES.indexOf(to);
+    const fromIndex = Object.keys(NOTE_MAPPINGS).indexOf(from);
+    const toIndex = Object.keys(NOTE_MAPPINGS).indexOf(to);
     if (fromIndex === -1 || toIndex === -1) return 0;
 
     return (toIndex - fromIndex + 12) % 12;
@@ -175,7 +173,9 @@ const shiftPosition = (
     offset: number
 ): ChordPosition => {
     return {
-        frets: position.frets.map((fret) => (fret >= 0 ? fret + offset : fret)),
+        // フレットパターンはそのまま維持
+        frets: [...position.frets],
+        // barresのフレット位置だけをシフト
         barres: position.barres?.map((barre) => ({
             fret: barre.fret + offset,
             strings: [...barre.strings],
