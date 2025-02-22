@@ -14,7 +14,7 @@ describe("コードポジション取得のテスト", () => {
         test("Cを渡すとAから派生したコードが含まれている", () => {
             const positions = getChordPositions("C");
             expect(positions).toContainEqual({
-                frets: [0, 3, 3, 3, 0, -1],
+                frets: [0, 2, 2, 2, 0, -1],
                 barres: [{ fret: 3, strings: [1, 5] }],
             });
         });

@@ -124,19 +124,23 @@ export const getChordPositions = (chord: string): ChordPosition[] => {
     if (chordParts === null) {
         return [];
     }
+    const openPositionKey = getOpenPositionKeyOfModifier(chordParts.modifier);
     const positions: ChordPosition[] = [];
 
+    const openPositions = OPEN_POSITIONS[openPositionKey];
+    if (!openPositions) {
+        return [];
+    }
+
     // オープンコードの取得
-    const openPosition =
-        OPEN_POSITIONS[chordParts.modifier]?.[chordParts.keyNote];
+    const openPosition = openPositions?.[chordParts.keyNote];
     if (openPosition) {
         positions.push(openPosition);
     }
 
     // 基本フォームを持つコードを探して派生系を作る
-    const modifier = chordParts.modifier;
-    Object.keys(OPEN_POSITIONS[modifier] || {}).forEach((note) => {
-        const position = OPEN_POSITIONS[modifier]?.[note];
+    Object.keys(openPositions || {}).forEach((note) => {
+        const position = openPositions?.[note];
         if (position?.barres?.length === 1) {
             const offset = getNoteOffset(note, chordParts.keyNote);
             if (offset > 0) {
@@ -149,16 +153,24 @@ export const getChordPositions = (chord: string): ChordPosition[] => {
 };
 
 /**
+ * 音階マッピング上のインデックスを取得する
+ * @param note 調べる音
+ * @returns インデックス(存在しない場合は-1)
+ */
+export const getNoteMappingsIndex = (note: string): number => {
+    return NOTE_MAPPINGS.findIndex((notes) => notes.includes(note));
+};
+
+/**
  * フレット差分を計算する
  * @param from
  * @param to
  * @returns
  */
 const getNoteOffset = (from: string, to: string): number => {
-    const fromIndex = Object.keys(NOTE_MAPPINGS).indexOf(from);
-    const toIndex = Object.keys(NOTE_MAPPINGS).indexOf(to);
+    const fromIndex = getNoteMappingsIndex(from);
+    const toIndex = getNoteMappingsIndex(to);
     if (fromIndex === -1 || toIndex === -1) return 0;
-
     return (toIndex - fromIndex + 12) % 12;
 };
 
@@ -181,4 +193,17 @@ const shiftPosition = (
             strings: [...barre.strings],
         })),
     };
+};
+
+const getOpenPositionKeyOfModifier = (modifier: string): string => {
+    if (modifier === "") {
+        return "major";
+    }
+    if (modifier === "m") {
+        return "minor";
+    }
+    if (modifier === "M7") {
+        return "maj7";
+    }
+    return modifier;
 };

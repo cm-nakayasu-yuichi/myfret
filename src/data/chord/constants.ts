@@ -1,5 +1,5 @@
 /** 音階の定義（異名同音を含む） */
-export const NOTE_MAPPINGS = [
+export const NOTE_MAPPINGS: ReadonlyArray<ReadonlyArray<string>> = [
     ["A"],
     ["A#", "B♭"],
     ["B"],
