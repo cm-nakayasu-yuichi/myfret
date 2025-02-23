@@ -76,7 +76,7 @@ export const OPEN_POSITIONS: Record<
             barres: [{ fret: 0, strings: [1, 5] }],
         },
         "A#": null,
-        B: null,
+        B: { frets: [0, 2, 2, 1, 2, -1] },
     },
     m7: {
         C: null,
