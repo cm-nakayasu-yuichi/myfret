@@ -73,7 +73,6 @@ export const drawDiagram = (
 
     position.frets.forEach((fret, stringIndex) => {
         const string = stringIndex + 1;
-        console.log(fret, string);
         if (fret > 0) {
             drawPosition(ctx, canvasSize, string, fret);
         } else if (fret == 0) {

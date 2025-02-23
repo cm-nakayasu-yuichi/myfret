@@ -1,4 +1,4 @@
-import { Note, NOTE_MAPPINGS } from "./constants";
+import { A_FORM_PRIORITY_NOTES, Note, NOTE_MAPPINGS } from "./constants";
 import { OPEN_POSITIONS } from "./data";
 import { ChordParts, ChordPattern, ChordPosition } from "./interfaces";
 
@@ -136,32 +136,53 @@ export const getChordPositions = (chord: string): ChordPosition[] => {
     if (chordParts === null) {
         return [];
     }
-    const openPositionKey = getOpenPositionKeyOfModifier(chordParts.modifier);
-    const positions: ChordPosition[] = [];
+    const modifierKey = getModifierKeyOfOpenPositionsMap(chordParts.modifier);
+    const firstPositions: ChordPosition[] = [];
 
-    const openPositions = OPEN_POSITIONS[openPositionKey];
-    if (!openPositions) {
+    const positionsPerModifier = OPEN_POSITIONS[modifierKey];
+    if (!positionsPerModifier) {
         return [];
     }
 
     // オープンコードの取得
-    const openPosition = openPositions?.[chordParts.keyNote];
+    const openPosition = positionsPerModifier?.[chordParts.keyNote];
     if (openPosition) {
-        positions.push(openPosition);
+        firstPositions.push(openPosition);
     }
 
+    // 派生系の位置を一時保存する配列
+    const eFormPositions: ChordPosition[] = [];
+    const aFormPositions: ChordPosition[] = [];
+    const otherPositions: ChordPosition[] = [];
+
     // 基本フォームを持つコードを探して派生系を作る
-    Object.keys(openPositions || {}).forEach((note) => {
-        const position = openPositions?.[note];
-        if (position?.barres?.length === 1) {
+    Object.keys(positionsPerModifier || {}).forEach((note) => {
+        const position = positionsPerModifier?.[note];
+        // バレーが1つのみで、そのフレット番号が0の場合は、派生形があると認められる
+        if (position?.barres?.length === 1 && position.barres[0].fret === 0) {
             const offset = getNoteOffset(note, chordParts.keyNote);
+            // 実際に派生コードを作るのはキー音と対象の音が違う場合である
+            // (EからFの派生コードは作るが、EからEの派生コードは作らないということ)
             if (offset > 0) {
-                positions.push(shiftPosition(position, offset));
+                // 派生系を分類
+                if (note === "E") {
+                    eFormPositions.push(shiftPosition(position, offset));
+                } else if (note === "A") {
+                    aFormPositions.push(shiftPosition(position, offset));
+                } else {
+                    otherPositions.push(shiftPosition(position, offset));
+                }
             }
         }
     });
 
-    return positions;
+    let returnPositions: ChordPosition[] = [];
+    if (A_FORM_PRIORITY_NOTES.includes(chordParts.keyNote)) {
+        returnPositions = [...firstPositions, ...aFormPositions, ...eFormPositions, ...otherPositions];
+    } else {
+        returnPositions = [...firstPositions, ...eFormPositions, ...aFormPositions, ...otherPositions];
+    }
+    return returnPositions
 };
 
 /**
@@ -207,7 +228,7 @@ const shiftPosition = (
     };
 };
 
-const getOpenPositionKeyOfModifier = (modifier: string): string => {
+const getModifierKeyOfOpenPositionsMap = (modifier: string): string => {
     if (modifier === "") {
         return "major";
     }
