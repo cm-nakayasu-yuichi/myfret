@@ -1,9 +1,6 @@
-import axios from "axios";
 import { HomeInfoResponse } from "../types";
+import { apiClient } from "./client";
 
 export const getHomeInfo = async (): Promise<HomeInfoResponse> => {
-    const response = await axios.get<HomeInfoResponse>(
-        `http://localhost:3001/api/home-info`,
-    );
-    return response.data;
+    return await apiClient.get<HomeInfoResponse>(`/api/home-info`);
 };

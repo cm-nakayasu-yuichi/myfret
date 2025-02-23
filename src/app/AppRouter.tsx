@@ -9,6 +9,7 @@ import {
     RankingArtistsRoute,
     ArtistRoute,
     SongRoute,
+    TestRoute,
 } from "./routes";
 
 export const AppRouter = () => {
@@ -55,6 +56,10 @@ export const AppRouter = () => {
                 <Route
                     path="/ranking/artists/:page"
                     element={routeElement(<RankingArtistsRoute />)}
+                />
+                <Route
+                    path="/test"
+                    element={routeElement(<TestRoute />, true)}
                 />
                 <Route
                     path="*"

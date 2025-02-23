@@ -1,13 +1,12 @@
-import axios from "axios";
 import { ArtistListResponse } from "../types";
 import { encodeURIWithPlus } from "../utils/encodeURIWithPlus";
+import { apiClient } from "./client";
 
 export const searchArtists = async (
-    keyword: string,
+    keyword: string
 ): Promise<ArtistListResponse> => {
     const encodedKeyword = encodeURIWithPlus(keyword);
-    const response = await axios.get<ArtistListResponse>(
-        `http://localhost:3001/api/search/artists/${encodedKeyword}`,
+    return await apiClient.get<ArtistListResponse>(
+        `/api/search/artists/${encodedKeyword}`
     );
-    return response.data;
 };

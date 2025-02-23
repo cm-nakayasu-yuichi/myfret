@@ -1,6 +1,6 @@
 import { Box, Pagination, PaginationItem, List } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
-import { buildPaginationUrl } from "../../utils/buildPaginationUrl";
+import { buildPaginationUrl } from "../../../utils/buildPaginationUrl";
 
 interface PaginatedListProps<T> {
     items: T[];
