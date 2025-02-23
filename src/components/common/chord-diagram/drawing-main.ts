@@ -65,7 +65,6 @@ export const drawDiagram = (
         if (barre.strings.length != 2) {
             return;
         }
-        const fret = barre.fret;
         const start = barre.strings[0];
         const end = barre.strings[1];
         drawBarre(ctx, canvasSize, 1, start, end);
