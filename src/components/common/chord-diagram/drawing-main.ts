@@ -39,6 +39,10 @@ export const drawDiagram = (
     height: number
 ) => {
     ctx.clearRect(0, 0, width, height);
+    if (!position) {
+        return;
+    }
+
     const canvasSize = { w: width, h: height };
 
     let fretNumber = 0;
