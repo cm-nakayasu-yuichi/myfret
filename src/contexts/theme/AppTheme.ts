@@ -11,12 +11,13 @@ export interface AppTheme {
         primary: string;
         secondary: string;
     };
-    chord_sheet: {
+    chordDiagram: {
+        main: string;
+        position: string;
+        number: string;
+    };
+    chordSheet: {
         chord: string;
         lyric: string;
-    };
-    chord_diagram: {
-        primary: string;
-        secondary: string;
     };
 };

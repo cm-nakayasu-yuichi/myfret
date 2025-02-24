@@ -1,17 +1,26 @@
 import { createTheme, Theme } from "@mui/material";
 import { lightTheme } from "./light-theme";
 import { darkTheme } from "./dark-theme";
-import { THEME, THEME_STORAGE_KEY } from "./ThemeContext";
-import { AppTheme } from "./AppTheme";
+import { THEME } from "./ThemeContext";
 
 declare module '@mui/material/styles' {
     interface Palette {
+        chordDiagram: {
+            main: string;
+            position: string;
+            number: string;
+        };
         chordSheet: {
             chord: string;
             lyric: string;
         }
     }
     interface PaletteOptions {
+        chordDiagram?: {
+            main: string;
+            position: string;
+            number: string;
+        };
         chordSheet?: {
             chord: string;
             lyric: string;
@@ -19,17 +28,8 @@ declare module '@mui/material/styles' {
     }
 };
 
-export const getAppTheme = (mode: THEME): AppTheme => {
-    return mode == 'light' ? lightTheme : darkTheme;
-}
-
-export const getCurrentAppTheme = (): AppTheme => {
-    const mode = (localStorage.getItem(THEME_STORAGE_KEY) as THEME) || 'light';
-    return getAppTheme(mode);
-}
-
 export const createAppTheme = (mode: THEME): Theme => {
-    const currentTheme = getAppTheme(mode);
+    const currentTheme = mode == 'light' ? lightTheme : darkTheme;
 
     return createTheme({
         palette: {
@@ -39,10 +39,8 @@ export const createAppTheme = (mode: THEME): Theme => {
             },
             background: currentTheme.background,
             text: currentTheme.text,
-            chordSheet: {
-                chord: currentTheme.chord_sheet.chord,
-                lyric: currentTheme.chord_sheet.lyric
-            }
+            chordSheet: currentTheme.chordSheet,
+            chordDiagram: currentTheme.chordDiagram
         },
         components: {
             MuiAppBar: {

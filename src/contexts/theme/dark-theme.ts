@@ -11,12 +11,13 @@ export const darkTheme = {
         primary: '#ffffff',
         secondary: '#b3b3b3',
     },
-    chord_sheet: {
+    chordDiagram: {
+        main: '#7f7f7f',
+        position:'#722f36',
+        number: '#7f7f7f',
+    },
+    chordSheet: {
         chord: '#4dc9b0',
         lyric: '#ffffff',
-    },
-    chord_diagram: {
-        primary: '#47b8a3',
-        secondary: '#722f36',
-    },
+    }
 };

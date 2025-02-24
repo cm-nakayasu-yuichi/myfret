@@ -11,12 +11,13 @@ export const lightTheme = {
         primary: '#000000',
         secondary: '#666666',
     },
-    chord_sheet: {
+    chordDiagram: {
+        main: '#000000',
+        position:'#000000',
+        number: '#000000',
+    },
+    chordSheet: {
         chord: '#444444',
         lyric: '#B22222',
-    },
-    chord_diagram: {
-        primary: '#000000',
-        secondary: '#000000',
     },
 };

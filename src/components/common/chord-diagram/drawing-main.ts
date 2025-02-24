@@ -1,4 +1,4 @@
-import { AppTheme } from "../../../contexts/theme/AppTheme";
+import { Theme } from "@mui/material";
 import { ChordPosition } from "../../../data/chord";
 import {
     drawBarre,
@@ -15,7 +15,7 @@ export const drawDiagram = (
     ctx: CanvasRenderingContext2D,
     width: number,
     height: number,
-    theme: AppTheme
+    theme: Theme
 ) => {
     ctx.clearRect(0, 0, width, height);
     if (!position) {
@@ -30,11 +30,11 @@ export const drawDiagram = (
         fretNumber = barres[0].fret;
     }
 
-    drawStrings(ctx, canvasSize, theme.chord_diagram.primary);
-    drawFrets(ctx, canvasSize, fretNumber == 0, theme.chord_diagram.primary);
+    drawStrings(ctx, canvasSize, theme.palette.chordDiagram.main);
+    drawFrets(ctx, canvasSize, fretNumber == 0, theme.palette.chordDiagram.main);
 
     if (fretNumber >= 1) {
-        drawFretNumber(ctx, canvasSize, fretNumber, theme.chord_diagram.primary);
+        drawFretNumber(ctx, canvasSize, fretNumber, theme.palette.chordDiagram.number);
     }
 
     barres?.forEach((barre) => {
@@ -46,17 +46,17 @@ export const drawDiagram = (
         }
         const start = barre.strings[0];
         const end = barre.strings[1];
-        drawBarre(ctx, canvasSize, 1, start, end, theme.chord_diagram.secondary);
+        drawBarre(ctx, canvasSize, 1, start, end, theme.palette.chordDiagram.position);
     });
 
     position.frets.forEach((fret, stringIndex) => {
         const string = stringIndex + 1;
         if (fret > 0) {
-            drawPosition(ctx, canvasSize, string, fret, theme.chord_diagram.secondary);
+            drawPosition(ctx, canvasSize, string, fret, theme.palette.chordDiagram.position);
         } else if (fret == 0) {
-            drawOpenStringMark(ctx, canvasSize, string, theme.chord_diagram.primary);
+            drawOpenStringMark(ctx, canvasSize, string, theme.palette.chordDiagram.main);
         } else {
-            drawMuteStringMark(ctx, canvasSize, string, theme.chord_diagram.primary);
+            drawMuteStringMark(ctx, canvasSize, string, theme.palette.chordDiagram.main);
         }
     });
 };
