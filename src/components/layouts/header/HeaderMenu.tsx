@@ -25,6 +25,7 @@ export const HeaderMenu = () => {
     ) => {
         if (newTheme !== null) {
             toggleTheme(newTheme);
+            onClose();
         }
     };
 
