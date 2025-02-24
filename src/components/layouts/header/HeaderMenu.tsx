@@ -1,8 +1,10 @@
 import { Box, Divider, IconButton, Menu, MenuItem, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const HeaderMenu = () => {
+    const navigate = useNavigate();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [theme, setTheme] = useState('light');
     const open = Boolean(anchorEl);
@@ -22,6 +24,16 @@ export const HeaderMenu = () => {
         if (newTheme !== null) {
             setTheme(newTheme);
         }
+    };
+
+    const onClickCodbbook = () => {
+        navigate('/codebook');
+        onClose();
+    };
+    
+    const onClickHelp = () => {
+        navigate('/help');
+        onClose();
     };
 
     return (
@@ -47,7 +59,18 @@ export const HeaderMenu = () => {
                     },
                 }}
             >
-                <MenuItem sx={{ py: 2 }}>
+                <MenuItem 
+                    sx={{ 
+                        py: 2,
+                        '& .MuiTouchRipple-root': {
+                            display: 'none',
+                        },
+                        '&:hover': {
+                            backgroundColor: 'transparent',
+                            cursor: 'default',
+                        }, 
+                    }}
+                >
                     <Box sx={{ width: '100%' }}>
                         <Typography variant="body1" sx={{ mb: 1 }}>テーマ</Typography>
                         <ToggleButtonGroup
@@ -68,7 +91,15 @@ export const HeaderMenu = () => {
                     </Box>
                 </MenuItem>
                 <Divider />
-                <MenuItem sx={{ py: 2 }}>
+                <MenuItem 
+                    onClick={onClickCodbbook}
+                    sx={{ 
+                        py: 2,
+                        '&:hover': {
+                            backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                        }, 
+                    }}
+                >
                     <Typography variant="body1">コードブック</Typography>
                 </MenuItem>
                 <Divider />
