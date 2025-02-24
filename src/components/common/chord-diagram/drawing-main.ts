@@ -1,3 +1,4 @@
+import { AppTheme } from "../../../contexts/theme/AppTheme";
 import { ChordPosition } from "../../../data/chord";
 import {
     drawBarre,
@@ -9,40 +10,18 @@ import {
     drawStrings,
 } from "./drawing-functions";
 
-export const drawDiagram_ = (
-    ctx: CanvasRenderingContext2D,
-    width: number,
-    height: number
-) => {
-    ctx.clearRect(0, 0, width, height);
-    const canvasSize = { w: width, h: height };
-
-    drawStrings(ctx, canvasSize);
-    drawFrets(ctx, canvasSize, false);
-
-    drawBarre(ctx, canvasSize, 1, 1, 5);
-
-    drawPosition(ctx, canvasSize, 2, 3);
-    drawPosition(ctx, canvasSize, 3, 2);
-    drawPosition(ctx, canvasSize, 4, 3);
-
-    drawOpenStringMark(ctx, canvasSize, 1);
-    drawMuteStringMark(ctx, canvasSize, 6);
-
-    drawFretNumber(ctx, canvasSize, 5);
-};
-
 export const drawDiagram = (
     position: ChordPosition,
     ctx: CanvasRenderingContext2D,
     width: number,
-    height: number
+    height: number,
+    theme: AppTheme
 ) => {
     ctx.clearRect(0, 0, width, height);
     if (!position) {
         return;
     }
-
+    
     const canvasSize = { w: width, h: height };
 
     let fretNumber = 0;
@@ -51,11 +30,11 @@ export const drawDiagram = (
         fretNumber = barres[0].fret;
     }
 
-    drawStrings(ctx, canvasSize);
-    drawFrets(ctx, canvasSize, fretNumber == 0);
+    drawStrings(ctx, canvasSize, theme.chord_diagram.primary);
+    drawFrets(ctx, canvasSize, fretNumber == 0, theme.chord_diagram.primary);
 
     if (fretNumber >= 1) {
-        drawFretNumber(ctx, canvasSize, fretNumber);
+        drawFretNumber(ctx, canvasSize, fretNumber, theme.chord_diagram.primary);
     }
 
     barres?.forEach((barre) => {
@@ -67,17 +46,17 @@ export const drawDiagram = (
         }
         const start = barre.strings[0];
         const end = barre.strings[1];
-        drawBarre(ctx, canvasSize, 1, start, end);
+        drawBarre(ctx, canvasSize, 1, start, end, theme.chord_diagram.secondary);
     });
 
     position.frets.forEach((fret, stringIndex) => {
         const string = stringIndex + 1;
         if (fret > 0) {
-            drawPosition(ctx, canvasSize, string, fret);
+            drawPosition(ctx, canvasSize, string, fret, theme.chord_diagram.secondary);
         } else if (fret == 0) {
-            drawOpenStringMark(ctx, canvasSize, string);
+            drawOpenStringMark(ctx, canvasSize, string, theme.chord_diagram.primary);
         } else {
-            drawMuteStringMark(ctx, canvasSize, string);
+            drawMuteStringMark(ctx, canvasSize, string, theme.chord_diagram.primary);
         }
     });
 };

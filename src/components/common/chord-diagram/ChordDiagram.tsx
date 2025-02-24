@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { drawDiagram } from './drawing-main';
 import { ChordPosition } from '../../../data/chord';
+import { getCurrentAppTheme } from '../../../contexts/theme/theme';
 
 interface Props {
     position: ChordPosition
@@ -33,7 +34,9 @@ export const ChordDiagram = ({ position }: Props) => {
         canvas.style.height = `${height}px`;
         ctx.scale(dpr, dpr);
 
-        drawDiagram(position, ctx, width, height);
+        const theme = getCurrentAppTheme();
+
+        drawDiagram(position, ctx, width, height, theme);
     }, [position]);
 
     return (

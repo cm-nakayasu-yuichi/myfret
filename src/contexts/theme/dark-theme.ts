@@ -1,14 +1,18 @@
 export const darkTheme = {
     background: {
-      default: '#121212',
-      paper: '#1e1e1e',
+        default: '#121212',
+        paper: '#1e1e1e',
     },
     header: {
-      background: '#000000',
-      text: '#ffffff',
+        background: '#000000',
+        text: '#ffffff',
     },
     text: {
-      primary: '#ffffff',
-      secondary: '#b3b3b3',
-    }
-  };
+        primary: '#ffffff',
+        secondary: '#b3b3b3',
+    },
+    chord_diagram: {
+        primary: '#525252',
+        secondary: '#722f36',
+    },
+};

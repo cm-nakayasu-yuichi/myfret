@@ -1,10 +1,20 @@
 import { createTheme, Theme } from "@mui/material";
 import { lightTheme } from "./light-theme";
 import { darkTheme } from "./dark-theme";
-import { THEME } from "./ThemeContext";
+import { THEME, THEME_STORAGE_KEY } from "./ThemeContext";
+import { AppTheme } from "./AppTheme";
+
+export const getAppTheme = (mode: THEME): AppTheme => {
+    return mode == 'light' ? lightTheme : darkTheme;
+}
+
+export const getCurrentAppTheme = (): AppTheme => {
+    const mode = (localStorage.getItem(THEME_STORAGE_KEY) as THEME) || 'light';
+    return getAppTheme(mode);
+}
 
 export const createAppTheme = (mode: THEME): Theme => {
-    const currentTheme = mode == 'light' ? lightTheme : darkTheme;
+    const currentTheme = getAppTheme(mode);
 
     return createTheme({
         palette: {
