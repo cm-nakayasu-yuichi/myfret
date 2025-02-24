@@ -148,7 +148,7 @@ export const SongPage = () => {
             <Container
                 sx={{ my: 4, display: "flex", justifyContent: "center" }}
             >
-                <CircularProgress />
+                <CircularProgress style={{ color: theme.palette.accent }} />
             </Container>
         );
     }
@@ -232,12 +232,12 @@ export const SongPage = () => {
                                 {result.artist}
                             </Link>
                             <TransposeBadge
-                                bgcolor='primary.main'
+                                bgcolor={`info.${theme.palette.mode == 'dark' ? 'dark' : 'main'}`}
                                 value={capo}
                                 getText={getCapoBadgeText}
                             />
                             <TransposeBadge
-                                bgcolor='success.main'
+                                bgcolor={`success.${theme.palette.mode == 'dark' ? 'dark' : 'main'}`}
                                 value={songKey}
                                 getText={getSongKeyBadgeText}
                             />
