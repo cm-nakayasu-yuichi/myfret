@@ -11,8 +11,12 @@ export const darkTheme = {
         primary: '#ffffff',
         secondary: '#b3b3b3',
     },
+    chord_sheet: {
+        chord: '#4dc9b0',
+        lyric: '#ffffff',
+    },
     chord_diagram: {
-        primary: '#525252',
+        primary: '#47b8a3',
         secondary: '#722f36',
     },
 };
