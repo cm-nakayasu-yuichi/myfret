@@ -2,12 +2,12 @@ import { Box, Divider, IconButton, Menu, MenuItem, ToggleButton, ToggleButtonGro
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { THEME, useTheme } from "../../../contexts/theme/ThemeContext";
+import { THEME, useThemeContext } from "../../../contexts/theme/ThemeContext";
 
 export const HeaderMenu = () => {
     const navigate = useNavigate();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const { mode, toggleTheme } = useTheme();
+    const { mode, toggleTheme } = useThemeContext();
     const open = Boolean(anchorEl);
   
     const onClick = (event: React.MouseEvent<HTMLElement>) => {
