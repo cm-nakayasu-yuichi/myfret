@@ -54,9 +54,9 @@ export const drawDiagram = (
         if (fret > 0) {
             drawPosition(ctx, canvasSize, string, fret, theme.palette.chordDiagram.position);
         } else if (fret == 0) {
-            drawOpenStringMark(ctx, canvasSize, string, theme.palette.chordDiagram.main);
+            drawOpenStringMark(ctx, canvasSize, string, theme.palette.chordDiagram.number);
         } else {
-            drawMuteStringMark(ctx, canvasSize, string, theme.palette.chordDiagram.main);
+            drawMuteStringMark(ctx, canvasSize, string, theme.palette.chordDiagram.number);
         }
     });
 };

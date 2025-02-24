@@ -13,8 +13,8 @@ export const darkTheme = {
         secondary: '#b3b3b3',
     },
     chordDiagram: {
-        main: '#7f7f7f',
-        position:'#722f36',
+        main: '#FFFFFF30',
+        position:'#348374',
         number: '#7f7f7f',
     },
     chordSheet: {
