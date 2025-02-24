@@ -1,14 +1,16 @@
-import { Box, Divider, IconButton, Menu, MenuItem, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
+import { Box, Divider, IconButton, Menu, MenuItem, ToggleButton, ToggleButtonGroup, Typography, useTheme } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { THEME, useThemeContext } from "../../../contexts/theme/ThemeContext";
 
 export const HeaderMenu = () => {
     const navigate = useNavigate();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const [theme, setTheme] = useState('light');
+    const { mode, toggleTheme } = useThemeContext();
     const open = Boolean(anchorEl);
-  
+    const theme = useTheme();
+    
     const onClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
     };
@@ -19,10 +21,11 @@ export const HeaderMenu = () => {
 
     const onThemeChange = (
         _event: React.MouseEvent<HTMLElement>,
-        newTheme: string,
+        newTheme: THEME,
     ) => {
         if (newTheme !== null) {
-            setTheme(newTheme);
+            toggleTheme(newTheme);
+            onClose();
         }
     };
 
@@ -38,7 +41,7 @@ export const HeaderMenu = () => {
 
     return (
         <>
-            <IconButton color="inherit" onClick={onClick}>
+            <IconButton onClick={onClick} sx={{ color: theme.palette.headerIcon }}>
                 <MenuIcon />
             </IconButton>
             <Menu
@@ -74,7 +77,7 @@ export const HeaderMenu = () => {
                     <Box sx={{ width: '100%' }}>
                         <Typography variant="body1" sx={{ mb: 1 }}>テーマ</Typography>
                         <ToggleButtonGroup
-                            value={theme}
+                            value={mode}
                             exclusive
                             onChange={onThemeChange}
                             aria-label="theme selection"
@@ -91,19 +94,11 @@ export const HeaderMenu = () => {
                     </Box>
                 </MenuItem>
                 <Divider />
-                <MenuItem 
-                    onClick={onClickCodbbook}
-                    sx={{ 
-                        py: 2,
-                        '&:hover': {
-                            backgroundColor: 'rgba(0, 0, 0, 0.04)',
-                        }, 
-                    }}
-                >
+                <MenuItem onClick={onClickCodbbook} sx={{ py: 2 }}>
                     <Typography variant="body1">コードブック</Typography>
                 </MenuItem>
                 <Divider />
-                <MenuItem sx={{ py: 2 }}>
+                <MenuItem onClick={onClickHelp} sx={{ py: 2 }}>
                     <Typography variant="body1">ヘルプ</Typography>
                 </MenuItem>
             </Menu>
