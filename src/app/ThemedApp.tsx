@@ -1,8 +1,9 @@
 import { AppRouter } from "./AppRouter";
 import { ThemeProvider as MUIThemeProvider, createTheme, CssBaseline } from "@mui/material";
 import { ThemeProvider, useTheme } from "../contexts/ThemeContext";
+import { ReactNode } from "react";
 
-export const ThemedApp = () => {
+const MUIThemeProviderWrapper = ({ children }: { children: ReactNode }) => {
     const { mode } = useTheme();
     
     const theme = createTheme({
@@ -10,13 +11,29 @@ export const ThemedApp = () => {
             mode,
         }
     });
-    
+
+    return(
+        <MUIThemeProvider theme={theme}>
+            <CssBaseline />
+            {children}
+        </MUIThemeProvider>
+    );
+}
+
+const ThemeProviderWrapper = ({ children }: { children: ReactNode }) => {
     return(
         <ThemeProvider>
-            <MUIThemeProvider theme={theme}>
-                <CssBaseline />
-                <AppRouter />
-            </MUIThemeProvider>
+            <MUIThemeProviderWrapper>
+                {children}
+            </MUIThemeProviderWrapper>
         </ThemeProvider>
+    );
+}
+
+export const ThemedApp = () => {
+    return(
+        <ThemeProviderWrapper>
+            <AppRouter />
+        </ThemeProviderWrapper>
     );
 };
