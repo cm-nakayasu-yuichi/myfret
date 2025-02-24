@@ -12,7 +12,7 @@ interface NormalListItemProps {
 const getStyles = (index: number) => ({
     bgcolor: (index + 1) % 2 === 0 ? "rgba(0, 0, 0, 0.02)" :  "inherit",
     "&:hover": {
-        bgcolor: "rgba(0, 0, 0, 0.04)"
+        bgcolor: "rgba(0, 0, 0, 0.1)"
     },
     textDecoration: "none",
     color: "inherit",

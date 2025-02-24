@@ -11,6 +11,7 @@ export interface AppTheme {
     text: {
         primary: string;
         secondary: string;
+        accent: string;
     };
     chordDiagram: {
         main: string;
@@ -20,5 +21,23 @@ export interface AppTheme {
     chordSheet: {
         chord: string;
         lyric: string;
+    };
+    rankingNumber: {
+        gold: {
+            background: string;
+            text: string;
+        };
+        silver: {
+            background: string;
+            text: string;
+        };
+        bronze: {
+            background: string;
+            text: string;
+        };
+        other: {
+            background: string;
+            text: string;
+        };
     };
 };

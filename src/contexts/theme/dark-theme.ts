@@ -11,6 +11,7 @@ export const darkTheme = {
     text: {
         primary: '#ffffff',
         secondary: '#b3b3b3',
+        accent: '#4dc9b0',
     },
     chordDiagram: {
         main: '#FFFFFF30',
@@ -20,5 +21,23 @@ export const darkTheme = {
     chordSheet: {
         chord: '#4dc9b0',
         lyric: '#ffffff',
-    }
+    },
+    rankingNumber: {
+        gold: {
+            background: '#6f7700',
+            text: '#ffffff',
+        },
+        silver: {
+            background: '#787878',
+            text: '#ffffff',
+        },
+        bronze: {
+            background: '#774920',
+            text:'#ffffff',
+        },
+        other: {
+            background: '#545454',
+            text: '#ffffff',
+        },
+    },
 };
