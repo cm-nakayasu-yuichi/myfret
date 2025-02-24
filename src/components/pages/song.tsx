@@ -9,6 +9,7 @@ import {
     Alert,
     Button,
     Link,
+    useTheme,
 } from "@mui/material";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -41,6 +42,7 @@ interface ScrollContainerRef {
 
 export const SongPage = () => {
     const navigate = useNavigate();
+    const theme = useTheme();
     const { songId = "" } = useParams<{ songId: string }>();
     const { loading, error, result } = useGetSong(songId);
     const [capo, setCapo] = useState<CapoValue>(0);
@@ -172,7 +174,13 @@ export const SongPage = () => {
     }
 
     return (
-        <Box sx={{ display: "flex", height: "calc(100vh - 64px)" }}>
+        <Box
+            sx={{ 
+                display: "flex",
+                height: "calc(100vh - 64px)",
+                bgcolor: theme.palette.background.default,
+            }}
+        >
             {/* メインコンテンツエリア */}
             <Box
                 sx={{
@@ -190,7 +198,7 @@ export const SongPage = () => {
                         boxShadow: 0,
                         borderBottom: 1,
                         borderColor: "divider",
-                        bgcolor: "#f5f5f5",
+                        bgcolor: theme.palette.background.default,
                     }}
                 >
                     <Box
@@ -251,7 +259,7 @@ export const SongPage = () => {
                         flex: 1,
                         overflow: "auto",
                         p: 3,
-                        bgcolor: "#f5f5f5",
+                        bgcolor: theme.palette.background.default,
                         position: "relative",
                     }}
                 >
@@ -266,7 +274,7 @@ export const SongPage = () => {
                             display: "flex",
                             flexDirection: "column",
                             justifyContent: "space-between",
-                            bgcolor: "#f5f5f5",
+                            bgcolor: theme.palette.background.default,
                             p: 1,
                             zIndex: 1,
                         }}
@@ -318,7 +326,7 @@ export const SongPage = () => {
                     borderRadius: 0,
                     borderLeft: 1,
                     borderColor: "divider",
-                    bgcolor: "#f5f5f5",
+                    bgcolor: theme.palette.background.default,
                     display: "flex",
                     flexDirection: "column",
                 }}

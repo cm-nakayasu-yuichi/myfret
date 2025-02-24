@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import { Header } from "../components/layouts/header";
 
 // ヘッダー付きレイアウト
@@ -6,8 +6,14 @@ interface LayoutWithHeaderProps {
     children: React.ReactNode;
 }
 const LayoutWithHeader = ({ children }: LayoutWithHeaderProps) => {
+    const theme = useTheme();
     return (
-        <Box sx={{ bgcolor: "#f5f5f5", minHeight: "100vh" }}>
+        <Box 
+            sx={{ 
+                bgcolor: theme.palette.background.default, 
+                minHeight: "100vh" 
+            }}
+        >
             <Header />
             {children}
         </Box>
