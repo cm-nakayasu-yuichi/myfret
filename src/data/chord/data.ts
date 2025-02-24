@@ -232,10 +232,13 @@ export const OPEN_POSITIONS: Record<
         },
         "D#": { frets: [2, 1, 2, 1, -1, -1] },
         "E": { frets: [3, 2, 3, 2, -1, -1] },
-        "F": { frets: [1, 0, 1, 0, -1, -1] },
+        "F": { frets: [1, 0, 1, 3, -1, -1] },
         "F#": { frets: [2, 1, 2, 1, -1, -1] },
         "G": { frets: [3, 2, 3, 2, -1, -1] },
-        "G#": { frets: [-1, 3, 4, 3, -1, 4] },
+        "G#": {
+            frets: [-1, 1, 2, 1, -1, 2],
+            barres: [{ fret: 3, strings: [2, 4] }],
+        },
         "A": {
             frets: [-1, 1, 2, 1, -1, 2],
             barres: [{ fret: 4, strings: [2, 4] }],
@@ -261,7 +264,7 @@ export const OPEN_POSITIONS: Record<
             barres: [{ fret: 0, strings: [1, 5] }],
         },
         "A#": null,
-        "B": null,
+        "B": { frets: [-1, 3, 2, 3, 2, -1] },
     },
     "aug": {
         "C": { frets: [-1, 1, 1, 2, 3, -1] },
