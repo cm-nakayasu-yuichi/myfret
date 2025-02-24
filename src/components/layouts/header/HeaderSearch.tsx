@@ -25,8 +25,6 @@ export const HeaderSearch = () => {
         navigate(url);
     };
 
-    console.log(searchType);
-
     return (
         <Paper
             sx={{
