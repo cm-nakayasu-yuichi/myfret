@@ -5,7 +5,6 @@ import { Path, Link as RouterLink } from "react-router-dom";
 interface NormalListItemProps {
     children: ReactNode,
     index: number,
-    key: string | number | bigint | null | undefined;
     to: string | Partial<Path>;
 }
 
@@ -22,12 +21,10 @@ const getStyles = (index: number) => ({
 export const NormalListItem = ({ 
     children,
     index,
-    key,
     to
 }: NormalListItemProps) => {
     return(
         <ListItem
-            key={key}
             component={RouterLink}
             to={to}
             divider
