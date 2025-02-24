@@ -4,7 +4,7 @@ import { darkTheme } from "./dark-theme";
 import { THEME } from "./ThemeContext";
 
 export const createAppTheme = (mode: THEME): Theme => {
-    const currentTheme = mode == 'light' ? darkTheme : lightTheme;
+    const currentTheme = mode == 'light' ? lightTheme : darkTheme;
 
     return createTheme({
         palette: {

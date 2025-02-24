@@ -2,11 +2,12 @@ import { Box, Divider, IconButton, Menu, MenuItem, ToggleButton, ToggleButtonGro
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { THEME, useTheme } from "../../../contexts/theme/ThemeContext";
 
 export const HeaderMenu = () => {
     const navigate = useNavigate();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const [theme, setTheme] = useState('light');
+    const { mode, toggleTheme } = useTheme();
     const open = Boolean(anchorEl);
   
     const onClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -19,10 +20,10 @@ export const HeaderMenu = () => {
 
     const onThemeChange = (
         _event: React.MouseEvent<HTMLElement>,
-        newTheme: string,
+        newTheme: THEME,
     ) => {
         if (newTheme !== null) {
-            setTheme(newTheme);
+            toggleTheme(newTheme);
         }
     };
 
@@ -74,7 +75,7 @@ export const HeaderMenu = () => {
                     <Box sx={{ width: '100%' }}>
                         <Typography variant="body1" sx={{ mb: 1 }}>テーマ</Typography>
                         <ToggleButtonGroup
-                            value={theme}
+                            value={mode}
                             exclusive
                             onChange={onThemeChange}
                             aria-label="theme selection"
@@ -91,19 +92,11 @@ export const HeaderMenu = () => {
                     </Box>
                 </MenuItem>
                 <Divider />
-                <MenuItem 
-                    onClick={onClickCodbbook}
-                    sx={{ 
-                        py: 2,
-                        '&:hover': {
-                            backgroundColor: 'rgba(0, 0, 0, 0.04)',
-                        }, 
-                    }}
-                >
+                <MenuItem onClick={onClickCodbbook} sx={{ py: 2 }}>
                     <Typography variant="body1">コードブック</Typography>
                 </MenuItem>
                 <Divider />
-                <MenuItem sx={{ py: 2 }}>
+                <MenuItem onClick={onClickHelp} sx={{ py: 2 }}>
                     <Typography variant="body1">ヘルプ</Typography>
                 </MenuItem>
             </Menu>
