@@ -5,7 +5,9 @@ import { HeaderMenu } from "./HeaderMenu";
 
 export const Header = () => {
     return (
-        <AppBar position="static" sx={{ bgcolor: "grey.800" }}>
+        <AppBar 
+            position="static"   
+        >
             <Toolbar>
                 <HeaderLogo />
                 <Box sx={{ flexGrow: 1 }} />

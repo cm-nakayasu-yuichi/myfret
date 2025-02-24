@@ -1,5 +1,5 @@
 import { AppRouter } from "./AppRouter";
-import { ThemeProvider as MUIThemeProvider, createTheme, CssBaseline } from "@mui/material";
+import { ThemeProvider as MUIThemeProvider, CssBaseline } from "@mui/material";
 import { ThemeProvider, useTheme } from "../contexts/theme/ThemeContext";
 import { ReactNode } from "react";
 import { createAppTheme } from "../contexts/theme/theme";

@@ -4,7 +4,7 @@ export const darkTheme = {
       paper: '#1e1e1e',
     },
     header: {
-      background: '#272727',
+      background: '#000000',
       text: '#ffffff',
     },
     text: {

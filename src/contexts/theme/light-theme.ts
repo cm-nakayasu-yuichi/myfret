@@ -4,7 +4,7 @@ export const lightTheme = {
       paper: '#ffffff',
     },
     header: {
-      background: '#1976d2',
+      background: '#424242',
       text: '#ffffff',
     },
     text: {
