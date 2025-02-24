@@ -1,6 +1,6 @@
 import { AppRouter } from "./AppRouter";
 import { ThemeProvider as MUIThemeProvider, createTheme, CssBaseline } from "@mui/material";
-import { ThemeProvider, useTheme } from "../contexts/ThemeContext";
+import { ThemeProvider, useTheme } from "../contexts/theme/ThemeContext";
 import { ReactNode } from "react";
 
 const MUIThemeProviderWrapper = ({ children }: { children: ReactNode }) => {
