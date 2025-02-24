@@ -5,6 +5,7 @@ import { THEME } from "./ThemeContext";
 
 declare module '@mui/material/styles' {
     interface Palette {
+        headerIcon: string;
         chordDiagram: {
             main: string;
             position: string;
@@ -16,6 +17,7 @@ declare module '@mui/material/styles' {
         }
     }
     interface PaletteOptions {
+        headerIcon: string;
         chordDiagram?: {
             main: string;
             position: string;
@@ -39,6 +41,7 @@ export const createAppTheme = (mode: THEME): Theme => {
             },
             background: currentTheme.background,
             text: currentTheme.text,
+            headerIcon: currentTheme.header.icon,
             chordSheet: currentTheme.chordSheet,
             chordDiagram: currentTheme.chordDiagram
         },
@@ -51,6 +54,16 @@ export const createAppTheme = (mode: THEME): Theme => {
                     },
                 },
             },
+            MuiIconButton: {
+                styleOverrides: {
+                    root: {
+                        color: currentTheme.text.primary,
+                        ":hover": {
+                            backgroundColor: `${currentTheme.text.secondary}4d`
+                        }
+                    },
+                }
+            }
         }
     })
 };

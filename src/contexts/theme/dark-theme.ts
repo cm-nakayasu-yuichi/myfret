@@ -6,6 +6,7 @@ export const darkTheme = {
     header: {
         background: '#000000',
         text: '#ffffff',
+        icon: '#ffffff',
     },
     text: {
         primary: '#ffffff',

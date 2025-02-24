@@ -1,4 +1,4 @@
-import { Box, Divider, IconButton, Menu, MenuItem, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
+import { Box, Divider, IconButton, Menu, MenuItem, ToggleButton, ToggleButtonGroup, Typography, useTheme } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +9,8 @@ export const HeaderMenu = () => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const { mode, toggleTheme } = useThemeContext();
     const open = Boolean(anchorEl);
-  
+    const theme = useTheme();
+    
     const onClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
     };
@@ -39,7 +40,7 @@ export const HeaderMenu = () => {
 
     return (
         <>
-            <IconButton color="inherit" onClick={onClick}>
+            <IconButton onClick={onClick} sx={{ color: theme.palette.headerIcon }}>
                 <MenuIcon />
             </IconButton>
             <Menu

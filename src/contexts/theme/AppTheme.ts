@@ -6,6 +6,7 @@ export interface AppTheme {
     header: {
         background: string;
         text: string;
+        icon: string;
     };
     text: {
         primary: string;

@@ -6,6 +6,7 @@ export const lightTheme = {
     header: {
         background: '#424242',
         text: '#ffffff',
+        icon: '#ffffff',
     },
     text: {
         primary: '#000000',

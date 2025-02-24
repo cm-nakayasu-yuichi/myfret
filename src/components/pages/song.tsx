@@ -284,10 +284,10 @@ export const SongPage = () => {
                             sx={{
                                 width: 40,
                                 height: 40,
-                                bgcolor: "white",
-                                "&:hover": {
-                                    bgcolor: "grey.100",
-                                },
+                                // bgcolor: "white",
+                                // "&:hover": {
+                                //     bgcolor: "grey.100",
+                                // },
                             }}
                         >
                             <KeyboardArrowUpIcon />
@@ -297,10 +297,10 @@ export const SongPage = () => {
                             sx={{
                                 width: 40,
                                 height: 40,
-                                bgcolor: "white",
-                                "&:hover": {
-                                    bgcolor: "grey.100",
-                                },
+                                // bgcolor: "white",
+                                // "&:hover": {
+                                //     bgcolor: "grey.100",
+                                // },
                             }}
                         >
                             <KeyboardArrowDownIcon />
