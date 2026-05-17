@@ -36,7 +36,7 @@ export const ChordSheetBox = styled(Box)`
             font-weight: bold !important;
             font-size: 16px;
             display: table-header-group;
-            color: #444444;
+            color: ${theme.palette.chordSheet.chord};
             margin: 0;
             padding: 0;
             border: none;
@@ -52,7 +52,7 @@ export const ChordSheetBox = styled(Box)`
             padding-left: 0;
             padding-right: 0;
             font-weight: bold;
-            color: #B22222;
+            color: ${theme.palette.chordSheet.lyric};
             outline: none;
             font-size: 16px;
         }

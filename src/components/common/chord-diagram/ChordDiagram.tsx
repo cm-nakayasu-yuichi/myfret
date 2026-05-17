@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { drawDiagram } from './drawing-main';
 import { ChordPosition } from '../../../data/chord';
+import { useTheme } from '@mui/material';
+import { useThemeContext } from '../../../contexts/theme/ThemeContext';
 
 interface Props {
     position: ChordPosition
@@ -12,8 +14,10 @@ export const ChordDiagram = ({ position }: Props) => {
 
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
+    const { mode } = useThemeContext();
+    const theme = useTheme();
 
-    useEffect(() => {
+    const reloadDiagram = (position: ChordPosition) => {
         const canvas = canvasRef.current;
         const container = containerRef.current
         if (!canvas || !container) return;
@@ -33,8 +37,16 @@ export const ChordDiagram = ({ position }: Props) => {
         canvas.style.height = `${height}px`;
         ctx.scale(dpr, dpr);
 
-        drawDiagram(position, ctx, width, height);
+        drawDiagram(position, ctx, width, height, theme);
+    }
+
+    useEffect(() => {
+        reloadDiagram(position);
     }, [position]);
+
+    useEffect(() => {
+        reloadDiagram(position);
+    }, [mode]);
 
     return (
         <div ref={containerRef}>

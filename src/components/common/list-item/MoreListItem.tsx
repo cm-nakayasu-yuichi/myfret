@@ -1,4 +1,4 @@
-import { ListItem } from "@mui/material";
+import { ListItem, useTheme } from "@mui/material";
 import { Path, Link as RouterLink } from "react-router-dom";
 
 interface MoreListItemProps {
@@ -6,6 +6,8 @@ interface MoreListItemProps {
 }
 
 export const MoreListItem = ({ to }: MoreListItemProps) => {
+    const theme = useTheme();
+
     return(
         <ListItem
             component={RouterLink}
@@ -13,11 +15,11 @@ export const MoreListItem = ({ to }: MoreListItemProps) => {
             divider
             sx={{
                 justifyContent: "center",
-                color: "primary.main",
+                color: theme.palette.text.primary,
                 textDecoration: "none",
                 py: 2,
                 "&:hover": {
-                    bgcolor: "rgba(0, 0, 0, 0.04)",
+                    bgcolor: "rgba(0, 0, 0, 0.1)",
                 },
             }}
         >

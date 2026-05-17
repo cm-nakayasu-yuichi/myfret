@@ -5,7 +5,6 @@ import { Path, Link as RouterLink } from "react-router-dom";
 interface NormalListItemProps {
     children: ReactNode,
     index: number,
-    key: string | number | bigint | null | undefined;
     to: string | Partial<Path>;
 }
 
@@ -13,7 +12,7 @@ interface NormalListItemProps {
 const getStyles = (index: number) => ({
     bgcolor: (index + 1) % 2 === 0 ? "rgba(0, 0, 0, 0.02)" :  "inherit",
     "&:hover": {
-        bgcolor: "rgba(0, 0, 0, 0.04)"
+        bgcolor: "rgba(0, 0, 0, 0.1)"
     },
     textDecoration: "none",
     color: "inherit",
@@ -22,12 +21,10 @@ const getStyles = (index: number) => ({
 export const NormalListItem = ({ 
     children,
     index,
-    key,
     to
 }: NormalListItemProps) => {
     return(
         <ListItem
-            key={key}
             component={RouterLink}
             to={to}
             divider

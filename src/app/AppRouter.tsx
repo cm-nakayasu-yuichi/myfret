@@ -9,6 +9,8 @@ import {
     RankingArtistsRoute,
     ArtistRoute,
     SongRoute,
+    CodebookRoute,
+    HelpRoute,
     TestRoute,
 } from "./routes";
 
@@ -56,6 +58,14 @@ export const AppRouter = () => {
                 <Route
                     path="/ranking/artists/:page"
                     element={routeElement(<RankingArtistsRoute />)}
+                />
+                <Route
+                    path="/codebook"
+                    element={routeElement(<CodebookRoute />)}
+                />
+                <Route
+                    path="/help"
+                    element={routeElement(<HelpRoute />)}
                 />
                 <Route
                     path="/test"

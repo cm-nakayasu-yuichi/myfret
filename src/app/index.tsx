@@ -1,5 +1,5 @@
-import { AppRouter } from "./AppRouter";
+import { ThemedApp } from "./ThemedApp";
 
 export const App = () => {
-    return <AppRouter />;
+    return <ThemedApp />;
 };

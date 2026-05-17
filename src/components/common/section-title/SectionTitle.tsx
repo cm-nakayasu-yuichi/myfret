@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import { ReactNode } from "react";
 
 interface SectionTitleProps {
@@ -7,6 +7,8 @@ interface SectionTitleProps {
 }
 
 export const SectionTitle = ({ children, total }: SectionTitleProps) => {
+    const theme = useTheme();
+
     if (total) {
         // 件数がある場合
         return(
@@ -22,9 +24,8 @@ export const SectionTitle = ({ children, total }: SectionTitleProps) => {
                     variant="h5"
                     sx={{
                         borderLeft: 4,
-                        borderColor: "error.main",
+                        borderColor: theme.palette.accent,
                         pl: 2,
-                        color: "text.primary",
                     }}
                 >
                     {children}
@@ -48,10 +49,9 @@ export const SectionTitle = ({ children, total }: SectionTitleProps) => {
                 gutterBottom
                 sx={{
                     borderLeft: 4,
-                    borderColor: "error.main",
+                    borderColor: theme.palette.accent,
                     pl: 2,
                     mb: 3,
-                    color: "text.primary",
                 }}
             >
                 {children}
