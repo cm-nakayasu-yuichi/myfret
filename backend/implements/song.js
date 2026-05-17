@@ -24,15 +24,15 @@ exports.getSong = async (req, res) => {
             return {
                 title:
                     document
-                        .querySelector("span.show_name")
+                        .querySelector("h1.p-detail-head__ttl")
                         ?.textContent?.trim() || "",
                 artist:
                     document
-                        .querySelector("span.show_artist")
+                        .querySelector("a.p-detail-head__artist")
                         ?.textContent?.trim() || "",
                 credit:
                     document
-                        .querySelector("p.show_lyrics")
+                        .querySelector("p.p-detail-head__lyrics")
                         ?.textContent?.trim() || "",
             };
         });
@@ -78,13 +78,11 @@ exports.getSong = async (req, res) => {
         });
 
         // カポ（キー）の取得
-        const selectedCapoOption = await page.locator(
-            'select[name="keyselect"] option[selected]'
-        );
+        const keyInput = await page.locator('input[name="key_scrollbar"]').first();
         let selectedCapo = 0;
 
-        if ((await selectedCapoOption.count()) > 0) {
-            const value = await selectedCapoOption.getAttribute("value");
+        if ((await keyInput.count()) > 0) {
+            const value = await keyInput.getAttribute("value");
             if (value) {
                 const parsedKey = parseInt(value);
                 // 有効な範囲（-9から+2）かチェック

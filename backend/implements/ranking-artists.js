@@ -1,51 +1,41 @@
 const express = require('express');
 
-const {
-    loadUrl,
-    isDisplay,
-    getRankingNumber,
-    isArtistListGroupItem,
-    getArtistId,
-    getArtistName
-} = require('../utils/cheerio');
-    
+const { loadUrl } = require('../utils/cheerio');
+
 const router = express.Router();
 
 exports.rankingArtists = async (req, res) => {
     try {
         const $ = await loadUrl(`https://www.ufret.jp/rank_artist.php`);
         const artists = [];
+        let rank = 0;
 
-        $('a.list-group-item').each((_, element) => {
-            // アーティスト以外は無視する
-            if (!isArtistListGroupItem($(element))) { return }
-            // 見えていない要素は無視する
-            if (!isDisplay($(element))) { return }
-            
-            const artistId = getArtistId($(element));
-            const name = getArtistName($(element));
-            const rank = getRankingNumber($(element));
-            
-            if (!artistId || !name || !rank) { return }
+        $('ul.c-list--rank li.c-list__item').each((_, element) => {
+            const link = $(element).find('a.c-list__link');
+            const href = link.attr('href') || '';
 
-            artists.push({ 
-                id: artistId, 
-                name: name,
-                rank: rank
-            });
+            // アーティスト以外は除外
+            if (!href.includes('artist.php')) { return; }
+
+            const artistId = href.match(/data=([^&]+)/)?.[1];
+            const name = link.find('p.c-list__title').text().trim();
+
+            rank++;
+
+            if (!artistId || !name) { return; }
+
+            artists.push({ id: artistId, name, rank });
         });
 
-        const count = artists.length;
-
         res.json({
-            artists: artists,
-            count: count,
+            artists,
+            count: artists.length,
         });
     } catch (error) {
         console.log(error)
         res.status(500).json({
             error: 'スクレイピングに失敗しました',
-            details: error.message 
+            details: error.message
         });
     }
 };
