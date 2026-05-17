@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { loadUrl } = require('../utils/cheerio');
+const { loadUrl } = require('../utils/http');
 
 const router = express.Router();
 
