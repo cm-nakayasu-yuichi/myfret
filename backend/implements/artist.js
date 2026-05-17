@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { loadUrl, isDisplay } = require('../utils/cheerio');
+const { loadUrl } = require('../utils/cheerio');
 
 const router = express.Router();
 
@@ -14,8 +14,8 @@ exports.getSongsOfArtist = async (req, res) => {
         $('ul.c-list li.c-list__item').each((_, element) => {
             const li = $(element);
 
-            // 非表示（初心者ver等）は除外
-            if (!isDisplay(li)) { return; }
+            // 初心者ver・動画プラスは除外
+            if (!li.hasClass('normal-chord')) { return; }
 
             const link = li.find('a.c-list__link');
             const href = link.attr('href') || '';
