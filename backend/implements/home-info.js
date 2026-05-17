@@ -1,19 +1,7 @@
 const express = require('express');
 
-const {
-    loadUrl,
-    isDisplay,
-    getArtistName,
-    isSongListGroupItem,
-    getSongId,
-    isArtistListGroupItem,
-    getRankingNumber,
-    getSongName,
-    getArtistNameOfSong,
-    getArtistId,
-    hasExcludeBadge
-} = require('../utils/cheerio');
-    
+const { loadUrl } = require('../utils/cheerio');
+
 const router = express.Router();
 
 exports.getHomeInfo = async (req, res) => {
@@ -21,44 +9,41 @@ exports.getHomeInfo = async (req, res) => {
         const $ = await loadUrl(`https://www.ufret.jp/`);
         const songs = [];
         const artists = [];
+        let songRank = 0;
+        let artistRank = 0;
 
-        $('a.list-group-item').each((_, element) => {
-            if (isSongListGroupItem($(element))) {
-                // 見えていない要素は無視する
-                if (!isDisplay($(element))) { return }
-                // 除外対象の場合は無視する
-                if (hasExcludeBadge($(element))) { return }
+        // 曲ランキング（ul.c-card-song の最初のブロックのみ＝今週のランキング）
+        $('ul.c-card-song').first().find('li.c-card-song__item').each((_, element) => {
+            const link = $(element).find('a[href*="song.php"]');
+            const href = link.attr('href') || '';
 
-                const songId = getSongId($(element));
-                const name = getSongName($(element));
-                const artist = getArtistNameOfSong($(element));
-                const rank = getRankingNumber($(element));
+            // 初心者バッジがある場合は除外
+            if (link.find('div.c-card-song__badge span.badge-info').length > 0) { return; }
 
-                if (!songId || !name || !artist || !rank) { return }
+            const songId = href.match(/data=([^&]+)/)?.[1];
+            const name = link.find('p.c-card-song__title').text().trim();
+            const artist = link.find('p.c-card-song__artist').text().trim();
 
-                songs.push({ 
-                    id: songId, 
-                    name: name,
-                    artist: artist,
-                    rank: rank
-                });
-            }
-            if (isArtistListGroupItem($(element))) {
-                // 見えていない要素は無視する
-                if (!isDisplay($(element))) { return }
+            songRank++;
 
-                const artistId = getArtistId($(element));
-                const name = getArtistName($(element));
-                const rank = getRankingNumber($(element));
+            if (!songId || !name || !artist) { return; }
 
-                if (!artistId || !name || !rank) { return }
+            songs.push({ id: songId, name, artist, rank: songRank });
+        });
 
-                artists.push({ 
-                    id: artistId, 
-                    name: name,
-                    rank: rank
-                });
-            }
+        // アーティストランキング（ul.c-card-artist）
+        $('ul.c-card-artist li.c-card-artist__item').each((_, element) => {
+            const link = $(element).find('a[href*="artist.php"]');
+            const href = link.attr('href') || '';
+
+            const artistId = href.match(/data=([^&]+)/)?.[1];
+            const name = link.find('p.c-card-artist__artist').text().trim();
+
+            artistRank++;
+
+            if (!artistId || !name) { return; }
+
+            artists.push({ id: artistId, name, rank: artistRank });
         });
 
         res.json({
@@ -69,7 +54,7 @@ exports.getHomeInfo = async (req, res) => {
         console.log(error)
         res.status(500).json({
             error: 'スクレイピングに失敗しました',
-            details: error.message 
+            details: error.message
         });
     }
 };
