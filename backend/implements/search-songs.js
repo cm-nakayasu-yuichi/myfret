@@ -1,16 +1,7 @@
 const express = require('express');
 
-const {
-    loadUrl,
-    isSongListGroupItem,
-    isDisplay,
-    getSongName,
-    getArtistNameOfSong,
-    getSongId,
-    getNumberOfSongs,
-    hasExcludeBadge
-} = require('../utils/cheerio');
-    
+const { loadUrl, isDisplay } = require('../utils/cheerio');
+
 const router = express.Router();
 
 exports.searchSongs = async (req, res) => {
@@ -19,39 +10,35 @@ exports.searchSongs = async (req, res) => {
         const $ = await loadUrl(`https://www.ufret.jp/search.php?key=${keyword}`);
         const songs = [];
 
-        $('a.list-group-item').each((_, element) => {
-            // 楽曲以外は無視する
-            if (!isSongListGroupItem($(element))) { return }
-            // 見えていない要素は無視する
-            if (!isDisplay($(element))) { return }
-            // 除外対象の場合は無視する
-            if (hasExcludeBadge($(element))) { return }
-            
-            const songId = getSongId($(element));
-            const name = getSongName($(element));
-            const artist = getArtistNameOfSong($(element));
-            
-            if (!songId || !name || !artist) { return }
+        $('ul.c-list li.c-list__item').each((_, element) => {
+            const li = $(element);
 
-            songs.push({ 
-                id: songId, 
-                name: name,
-                artist: artist,
-                rank: 0
-            });
+            // 非表示（初心者ver等）は除外
+            if (!isDisplay(li)) { return; }
+
+            const link = li.find('a.c-list__link');
+            const href = link.attr('href') || '';
+
+            if (!href.includes('song.php')) { return; }
+
+            const songId = href.match(/data=([^&]+)/)?.[1];
+            const name = link.find('p.c-list__title').clone().children().remove().end().text().trim();
+            const artist = link.find('p.c-list__artist').text().trim();
+
+            if (!songId || !name || !artist) { return; }
+
+            songs.push({ id: songId, name, artist, rank: 0 });
         });
 
-        const count = getNumberOfSongs($);
-
         res.json({
-            songs: songs,
-            count: count,
+            songs,
+            count: songs.length,
         });
     } catch (error) {
         console.log(error)
         res.status(500).json({
             error: 'スクレイピングに失敗しました',
-            details: error.message 
+            details: error.message
         });
     }
 };

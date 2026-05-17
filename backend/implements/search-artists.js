@@ -1,15 +1,7 @@
 const express = require('express');
 
-const {
-    loadUrl,
-    isArtistListGroupItem,
-    isDisplay,
-    getArtistName,
-    getArtistNameOfSong,
-    getArtistId,
-    getNumberOfSongs
-} = require('../utils/cheerio');
-    
+const { loadUrl } = require('../utils/cheerio');
+
 const router = express.Router();
 
 exports.searchArtists = async (req, res) => {
@@ -18,33 +10,27 @@ exports.searchArtists = async (req, res) => {
         const $ = await loadUrl(`https://www.ufret.jp/search.php?key=${keyword}`);
         const artists = [];
 
-        $('a.artist_list').each((_, element) => {
-            // アーティスト以外は無視する
-            if (!isArtistListGroupItem($(element))) { return }
+        $('ul.c-card-artist li.c-card-artist__item').each((_, element) => {
+            const link = $(element).find('a[href*="artist.php"]');
+            const href = link.attr('href') || '';
 
-            const artistId = getArtistId($(element));
-            const name = $(element).text().trim();
-            
-            if (!artistId || !name) { return }
+            const artistId = href.match(/data=([^&]+)/)?.[1];
+            const name = link.find('p.c-card-artist__artist').text().trim();
 
-            artists.push({ 
-                id: artistId, 
-                name: name,
-                rank: 0
-            });
+            if (!artistId || !name) { return; }
+
+            artists.push({ id: artistId, name, rank: 0 });
         });
 
-        const count = artists.length;
-
         res.json({
-            artists: artists,
-            count: count,
+            artists,
+            count: artists.length,
         });
     } catch (error) {
         console.log(error)
         res.status(500).json({
             error: 'スクレイピングに失敗しました',
-            details: error.message 
+            details: error.message
         });
     }
 };
