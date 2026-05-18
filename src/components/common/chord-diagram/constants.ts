@@ -13,7 +13,7 @@ export const LINE_WIDTH = 2;
 /** 弦の数 */
 export const STRING_NUM = 6;
 /** 弦を右に余らせる長さ */
-export const STRING_ESCESS_WIDTH = 10;
+export const STRING_EXCESS_WIDTH = 10;
 
 /** フレットの数 */
 export const FRET_NUM = 5;

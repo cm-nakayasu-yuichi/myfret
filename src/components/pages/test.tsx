@@ -1,7 +1,7 @@
 import { Box, Paper, Typography } from "@mui/material";
-import { ChordDiagramViewer } from "../../components/common/chord-diagram";
+import { ChordDiagramViewer } from "../common/chord-diagram";
 
-export const TestRoute = () => {
+export const TestPage = () => {
 
     return (
         <Paper

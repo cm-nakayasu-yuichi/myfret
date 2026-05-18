@@ -7,3 +7,5 @@ export * from "./ranking-artists";
 export * from "./ranking-songs";
 export * from "./codebook";
 export * from "./help";
+export * from "./test";
+export * from "./not-found";

@@ -3,14 +3,14 @@ import { HomeArtistRankingSection, HomeContainer, HomeSongRankingSection } from 
 import { PageContainer } from "../layouts/page-container";
 
 export const HomePage = () => {
-    const { loading, error, result } = useGetHomeInfo();
+    const state = useGetHomeInfo();
 
     return (
         <PageContainer>
             <HomeContainer
-                song={<HomeSongRankingSection state={{ loading, error, result }} />}
-                artist={<HomeArtistRankingSection state={{ loading, error, result }} />}
+                song={<HomeSongRankingSection state={state} />}
+                artist={<HomeArtistRankingSection state={state} />}
             />
-        </PageContainer >
+        </PageContainer>
     );
 }

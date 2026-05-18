@@ -1,4 +1,3 @@
-// src/app/routes/SearchSongsRoute.tsx
 import { useParams } from "react-router-dom";
 import { useSearchSongs } from "../../hooks/useSearchSongs";
 import { ListContainer } from "../../components/layouts/list-container";

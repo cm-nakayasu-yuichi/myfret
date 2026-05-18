@@ -38,12 +38,12 @@ declare module '@mui/material/styles' {
     interface PaletteOptions {
         accent: string;
         headerIcon: string;
-        chordDiagram?: {
+        chordDiagram: {
             main: string;
             position: string;
             number: string;
         };
-        chordSheet?: {
+        chordSheet: {
             chord: string;
             lyric: string;
         };

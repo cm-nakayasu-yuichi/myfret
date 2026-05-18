@@ -1,4 +1,4 @@
-import { FRET_NUM, STRING_ESCESS_WIDTH, STRING_NUM } from "./constants";
+import { FRET_NUM, STRING_EXCESS_WIDTH, STRING_NUM } from "./constants";
 import { Edge, Rect, Size } from "./dimensions";
 import { getFingerboardRect } from "./rect-calculation";
 
@@ -19,7 +19,7 @@ export const getStringInterval = (canvasSize: Size): number => {
  */
 export const getFretInterval = (canvasSize: Size): number => {
     const fingerboardRect = getFingerboardRect(canvasSize);
-    return (fingerboardRect.w - STRING_ESCESS_WIDTH) / (FRET_NUM - 1);
+    return (fingerboardRect.w - STRING_EXCESS_WIDTH) / (FRET_NUM - 1);
 };
 
 /**

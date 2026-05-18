@@ -1,7 +1,7 @@
 import { Box, Typography, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-export const NotFoundRoute = () => {
+export const NotFoundPage = () => {
     const navigate = useNavigate();
 
     return (

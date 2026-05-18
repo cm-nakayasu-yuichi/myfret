@@ -29,7 +29,7 @@ export const drawLine = (
  * 円を描画する
  * @param ctx コンテキスト
  * @param point 中心位置
- * @param size 円のサイズ(半径)
+ * @param size 円のサイズ(直径)
  * @param color 色
  * @param fill 中を塗るかどうか
  */
