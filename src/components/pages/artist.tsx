@@ -18,7 +18,7 @@ export const ArtistPage = () => {
         handlePageChange,
     } = usePagination(result?.songs || [], {
         itemsPerPage: 15,
-        baseUrl: "/artist/",
+        baseUrl: "/artist",
         currentUrlPage: page,
         query: name,
     });
@@ -36,7 +36,7 @@ export const ArtistPage = () => {
                     currentPage={currentPage}
                     totalPages={totalPages}
                     onPageChange={handlePageChange}
-                    baseUrl="/artist/"
+                    baseUrl="/artist"
                     query={name}
                     renderItem={(song, index) => (
                         <NormalListItem

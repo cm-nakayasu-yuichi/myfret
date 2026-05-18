@@ -19,7 +19,7 @@ export const RankingSongsPage = () => {
         handlePageChange,
     } = usePagination(result?.songs || [], {
         itemsPerPage: 20,
-        baseUrl: "/ranking/songs/",
+        baseUrl: "/ranking/songs",
         currentUrlPage: page,
     });
 
@@ -36,7 +36,7 @@ export const RankingSongsPage = () => {
                     currentPage={currentPage}
                     totalPages={totalPages}
                     onPageChange={handlePageChange}
-                    baseUrl="/ranking/songs/"
+                    baseUrl="/ranking/songs"
                     renderItem={(song, index) => (
                         <NormalListItem
                             index={index}

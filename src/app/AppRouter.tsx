@@ -44,7 +44,7 @@ export const AppRouter = () => {
                     element={routeElement(<SearchArtistsRoute />)}
                 />
                 <Route
-                    path="/ranking/songs/"
+                    path="/ranking/songs"
                     element={routeElement(<RankingSongsRoute />)}
                 />
                 <Route
@@ -52,7 +52,7 @@ export const AppRouter = () => {
                     element={routeElement(<RankingSongsRoute />)}
                 />
                 <Route
-                    path="/ranking/artists/"
+                    path="/ranking/artists"
                     element={routeElement(<RankingArtistsRoute />)}
                 />
                 <Route
