@@ -1,79 +1,79 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { routeElement } from "../utils/routeElement";
 import {
-    HomeRoute,
-    SearchSongsRoute,
-    NotFoundRoute,
-    SearchArtistsRoute,
-    RankingSongsRoute,
-    RankingArtistsRoute,
-    ArtistRoute,
-    SongRoute,
-    CodebookRoute,
-    HelpRoute,
-    TestRoute,
-} from "./routes";
+    HomePage,
+    SearchSongsPage,
+    NotFoundPage,
+    SearchArtistsPage,
+    RankingSongsPage,
+    RankingArtistsPage,
+    ArtistPage,
+    SongPage,
+    CodebookPage,
+    HelpPage,
+    TestPage,
+} from "../components/pages";
 
 export const AppRouter = () => {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={routeElement(<HomeRoute />)} />
+                <Route path="/" element={routeElement(<HomePage />)} />
                 <Route
                     path="/artist/:name"
-                    element={routeElement(<ArtistRoute />)}
+                    element={routeElement(<ArtistPage />)}
                 />
                 <Route
                     path="/artist/:name/:page"
-                    element={routeElement(<ArtistRoute />)}
+                    element={routeElement(<ArtistPage />)}
                 />
                 <Route
                     path="/song/:songId"
-                    element={routeElement(<SongRoute />)}
+                    element={routeElement(<SongPage />)}
                 />
                 <Route
                     path="/search/songs/:keyword"
-                    element={routeElement(<SearchSongsRoute />)}
+                    element={routeElement(<SearchSongsPage />)}
                 />
                 <Route
                     path="/search/artists/:keyword"
-                    element={routeElement(<SearchArtistsRoute />)}
+                    element={routeElement(<SearchArtistsPage />)}
                 />
                 <Route
                     path="/search/artists/:keyword/:page"
-                    element={routeElement(<SearchArtistsRoute />)}
+                    element={routeElement(<SearchArtistsPage />)}
                 />
                 <Route
                     path="/ranking/songs"
-                    element={routeElement(<RankingSongsRoute />)}
+                    element={routeElement(<RankingSongsPage />)}
                 />
                 <Route
                     path="/ranking/songs/:page"
-                    element={routeElement(<RankingSongsRoute />)}
+                    element={routeElement(<RankingSongsPage />)}
                 />
                 <Route
                     path="/ranking/artists"
-                    element={routeElement(<RankingArtistsRoute />)}
+                    element={routeElement(<RankingArtistsPage />)}
                 />
                 <Route
                     path="/ranking/artists/:page"
-                    element={routeElement(<RankingArtistsRoute />)}
+                    element={routeElement(<RankingArtistsPage />)}
                 />
                 <Route
                     path="/codebook"
-                    element={routeElement(<CodebookRoute />)}
+                    element={routeElement(<CodebookPage />)}
                 />
                 <Route
                     path="/help"
-                    element={routeElement(<HelpRoute />)}
+                    element={routeElement(<HelpPage />)}
                 />
                 <Route
                     path="/test"
-                    element={routeElement(<TestRoute />, true)}
+                    element={routeElement(<TestPage />, true)}
                 />
                 <Route
                     path="*"
-                    element={routeElement(<NotFoundRoute />, true)}
+                    element={routeElement(<NotFoundPage />, true)}
                 />
             </Routes>
         </Router>
