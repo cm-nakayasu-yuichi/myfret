@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(pnpm dev *)",
+      "Bash(grep -v \"^[0-9]*:.*<script\\\\|^[0-9]*:.*var \\\\|^[0-9]*:.*//\\\\|^[0-9]*:.*function\\\\|^[0-9]*:.*\\\\.js\\\\|^[0-9]*:.*css\\\\|^[0-9]*:.*\\\\$\\(\")",
+      "Bash(grep -v \"^[0-9]*:.*<script\\\\|^[0-9]*:.*//\\\\|^[0-9]*:.*var \\\\|^[0-9]*:.*\\\\.js\\\\|^[0-9]*:.*\\\\.css\\\\|^[0-9]*:.*function\\\\|^[0-9]*:.*\\\\$\\(\")",
+      "Bash(grep -v \"^[0-9]*:.*<script\\\\|^[0-9]*:.*//\\\\|^[0-9]*:.*\\\\$\\(\")",
+      "Bash(git *)",
+      "Bash(gh pr *)",
+      "Bash(cat)",
+      "Bash(bash /tmp/check_unused.sh)",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "Bash(claude mcp *)",
+      "Bash(gh --version)",
+      "Bash(gh auth *)",
+      "Bash(gh label *)",
+      "Bash(gh project *)",
+      "Bash(bash *)",
+      "Bash(grep -n \"^add_issue\\\\|^EOF\\\\|^\\)\\\\\"$\" /tmp/myfret-issues.sh)"
+    ]
+  }
+}
