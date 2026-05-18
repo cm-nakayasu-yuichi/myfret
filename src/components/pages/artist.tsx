@@ -5,12 +5,12 @@ import { NormalListItem } from "../../components/common/list-item";
 import { PaginatedList } from "../../components/common/list";
 import { SectionTitle } from "../../components/common/section-title";
 import { usePagination } from "../../hooks/usePagination";
-import { useGetSongsOfArtsist } from "../../hooks/useGetSongsOfArtsist";
+import { useGetSongsOfArtist } from "../../hooks/useGetSongsOfArtist";
 import { PageContainer } from "../../components/layouts/page-container";
 
 export const ArtistPage = () => {
     const { name = "", page } = useParams<{ name: string; page?: string }>();
-    const { loading, error, result } = useGetSongsOfArtsist(name);
+    const { loading, error, result } = useGetSongsOfArtist(name);
     const {
         currentItems: currentSongs,
         currentPage,

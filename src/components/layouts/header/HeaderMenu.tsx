@@ -29,7 +29,7 @@ export const HeaderMenu = () => {
         }
     };
 
-    const onClickCodbbook = () => {
+    const onClickCodebook = () => {
         navigate('/codebook');
         onClose();
     };
@@ -94,7 +94,7 @@ export const HeaderMenu = () => {
                     </Box>
                 </MenuItem>
                 <Divider />
-                <MenuItem onClick={onClickCodbbook} sx={{ py: 2 }}>
+                <MenuItem onClick={onClickCodebook} sx={{ py: 2 }}>
                     <Typography variant="body1">コードブック</Typography>
                 </MenuItem>
                 <Divider />

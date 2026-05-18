@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { SongListResponse } from "../types";
 import { getArtist } from "../api";
 
-export const useGetSongsOfArtsist = (name: string) => {
+export const useGetSongsOfArtist = (name: string) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [result, setResult] = useState<SongListResponse | null>(null);
@@ -16,7 +16,7 @@ export const useGetSongsOfArtsist = (name: string) => {
                 setResult(data);
             } catch (error) {
                 setError("");
-                console.log("useGetSongsOfArtsist error:", error);
+                console.log("useGetSongsOfArtist error:", error);
             } finally {
                 setLoading(false);
             }

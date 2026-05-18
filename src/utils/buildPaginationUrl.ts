@@ -6,12 +6,12 @@
  * @returns {string} 構築されたURL
  * @example
  * // クエリあり
- * buildPageUrl('/search/', 'keyword', 1)  // => '/search/keyword'
- * buildPageUrl('/search/', 'keyword', 2)  // => '/search/keyword/2'
+ * buildPaginationUrl('/search/', 'keyword', 1)  // => '/search/keyword'
+ * buildPaginationUrl('/search/', 'keyword', 2)  // => '/search/keyword/2'
  *
  * // クエリなし
- * buildPageUrl('/items/', undefined, 1)   // => '/items/'
- * buildPageUrl('/items/', undefined, 2)   // => '/items/2'
+ * buildPaginationUrl('/items/', undefined, 1)   // => '/items/'
+ * buildPaginationUrl('/items/', undefined, 2)   // => '/items/2'
  */
 export const buildPaginationUrl = (
     baseUrl: string,
