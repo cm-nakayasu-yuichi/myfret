@@ -70,11 +70,10 @@ interface ListContainerProps {
 | 状態 | 表示 |
 | --- | --- |
 | `loading === true` | 中央に `CircularProgress` |
-| `empty === true` | テキスト「取得に失敗しました」 |
-| `error` が truthy | テキスト「取得に失敗しました」 |
+| `empty === true` または `error` が truthy | テキスト「取得に失敗しました」 |
 | 上記以外 | `Paper` でラップした `children` を表示 |
 
-状態の優先順位: **loading → empty → error → 通常**。`empty` と `error` で同じメッセージを出すのは現状の実装挙動。
+状態の優先順位: **loading → empty/error → 通常**。`empty` と `error` は同じメッセージを返す（現状の実装挙動）。
 
 ## 3. ヘッダ
 

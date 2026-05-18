@@ -16,22 +16,7 @@ export const ListContainer = ({ children, empty, loading, error }: ListContainer
             </Box>
         );
     }
-    if (empty) {
-        return (
-            <List sx={{ p: 0 }}>
-                <ListItem
-                    sx={{
-                        bgcolor: "inherit",
-                        textDecoration: "none",
-                        color: "inherit",
-                    }}
-                >
-                    取得に失敗しました
-                </ListItem>
-            </List>
-        );
-    }
-    if (error) {
+    if (empty || error) {
         return (
             <List sx={{ p: 0 }}>
                 <ListItem
